@@ -25,3 +25,12 @@ to deactivate the environment
 ```
 deactivate
 ```
+
+TODO(ethanweber)
+## Image Similarity Endpoint
+
+<servername image similarity endpoint>?base64encoded image
+
+response: {
+    similar image names: [list in order of most similar images],
+}

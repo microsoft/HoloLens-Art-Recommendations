@@ -3,3 +3,8 @@ opencv-python
 ipykernel
 requests
 pandas
+torch
+torchvision
+matplotlib
+pylint
+Flask
