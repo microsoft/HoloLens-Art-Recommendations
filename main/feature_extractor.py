@@ -22,7 +22,7 @@ import os
 #         plt.title(objectID)
 
 class FeatureExtractor(torch.nn.Module):
-    def __init__(self, image_folder_path):
+    def __init__(self, image_folder_path=None):
         super(FeatureExtractor, self).__init__()
 
         # use resnet18 with pretrained weights
@@ -40,15 +40,19 @@ class FeatureExtractor(torch.nn.Module):
             transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
         ])
 
+    def normalized_image_from_image(self, image):
+
+        image = self.loader(image).float()
+        image = Variable(image, requires_grad=True)
+        image = image.unsqueeze(0) # to makes this have a batch dim
+        return image.cuda() if torch.cuda.is_available() else image
+
     def normalized_image_from_filename(self, filename):
         # returns the image tensor given a filename
 
         # converting to RGB because sometimes they are grayscale and only have 1 channel in that case
         image = Image.open(filename).convert('RGB')
-        image = self.loader(image).float()
-        image = Variable(image, requires_grad=True)
-        image = image.unsqueeze(0) # to makes this have a batch dim
-        return image.cuda() if torch.cuda.is_available() else image
+        return self.normalized_image_from_image(image)
 
     def get_filename_from_objectid(self, objectid):
         # returns the filename given the object id
@@ -63,10 +67,19 @@ class FeatureExtractor(torch.nn.Module):
             objectids.append(objectid)
         return sorted(objectids)
 
-    def forward(self, objectid):
-        # get the filename
-        filename = self.get_filename_from_objectid(objectid)
-        # note this image has a batch dimension
-        image = self.normalized_image_from_filename(filename)
+    def forward(self, objectid, image=None):
+
+        print(image)
+
+        # can call forward with the image data instead of objectid too
+        if image is not None:
+            image = self.normalized_image_from_image(image)
+            return self.model(image)
+        else:
+            # get the filename
+            filename = self.get_filename_from_objectid(objectid)
+            # note this image has a batch dimension
+            image = self.normalized_image_from_filename(filename)
+
         return self.model(image)
     

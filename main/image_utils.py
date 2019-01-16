@@ -1,6 +1,7 @@
 # file to hold the image utils needed for our work
 
 import numpy as np
+import os
 from PIL import Image
 import matplotlib.pyplot as plt
 
@@ -24,7 +25,8 @@ def find_k_closest(this_vec, features_dict, k=5):
     return closest_and_dists
 
 def get_image_by_objectid(objectid):
-    image_filename = "../data/images/{}.jpg".format(objectid)
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    image_filename = os.path.join(current_dir, "data/images/", "{}.jpg".format(objectid))
     image = Image.open(image_filename).convert('RGB')
     return image
 
