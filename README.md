@@ -1,5 +1,5 @@
 # Augmented Reality Art Museum with the Microsoft Hololens
-> This project demonstrates the potential to use augmented reality in art museums. Here we outline an example of a complete application from start to finish. This project makes use of the [The Metropolitan Museum of Art Collection API](https://metmuseum.github.io/). The project consists of two major components, namely the `backend` (data processing and web app endpoing deployment) and `frontend` (Unity application for the Hololens).
+> This project demonstrates the potential to use augmented reality in art museums. Here we outline an example of a complete application from start to finish. This project makes use of the [The Metropolitan Museum of Art Collection API](https://metmuseum.github.io/). The project consists of two major components, namely the `backend` (data processing and web app endpoing deployment) and `frontend` (Unity application for the Hololens). This README.md file and linked notebooks are used to illustrate the process of replicating this work.
 
 ## Local Development Setup
 > We use a virtual environment for local development. Here are the steps to make this work on any machine.
@@ -38,6 +38,9 @@ response: {
 cd main
 docker build -t arart .
 docker run -d -p 80:80 -v $(pwd)/data:/main/data arart (-d puts this in the background)
+
+# for entering the container
+docker run -it --entrypoint /bin/bash -v $(pwd)/data:/main/data arart
 ```
 - Located at http://0.0.0.0:80
 
