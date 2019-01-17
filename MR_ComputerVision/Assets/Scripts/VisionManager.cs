@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Experimental.UIElements;
 using UnityEngine.Networking;
 
 public class VisionManager : MonoBehaviour {
@@ -11,18 +12,21 @@ public class VisionManager : MonoBehaviour {
     public class TagData
     {
         public string name;
-        public float confidence;
+        //public float confidence;
     }
 
     [System.Serializable]
     public class AnalysedObject
     {
-        public TagData[] tags;
-        public string requestId;
-        public object metadata;
+        public string img_str;
+        //public string requestId;
+        //public object metadata;
     }
 
     public static VisionManager instance;
+
+    public Texture2D tex;
+    public bool update_image;
 
     // you must insert your service key here!    
     private string authorizationKey = "ab5992b690a447ec84d4b4d40138dfc2";
@@ -32,11 +36,16 @@ public class VisionManager : MonoBehaviour {
     internal byte[] imageBytes;
 
     internal string imagePath;
+    internal string textPath;
 
     private void Awake()
     {
         // allows this instance to behave like a singleton
         instance = this;
+
+        textPath = Path.Combine(Application.persistentDataPath, "img_str.txt");
+
+        update_image = false;
     }
 
     /// <summary>
@@ -45,58 +54,126 @@ public class VisionManager : MonoBehaviour {
     public IEnumerator AnalyseLastImageCaptured()
     {
         WWWForm webForm = new WWWForm();
-        using (UnityWebRequest unityWebRequest = UnityWebRequest.Post(visionAnalysisEndpoint, webForm))
+
+        // gets a byte array out of the saved image
+        imageBytes = GetImageAsByteArray(imagePath);
+        String s = Convert.ToBase64String(imageBytes);
+        webForm.AddField("image", s);
+
+        using (UnityWebRequest unityWebRequest = UnityWebRequest.Post("http://localhost:5000/endpoint", webForm))
         {
-            // gets a byte array out of the saved image
-            imageBytes = GetImageAsByteArray(imagePath);
-            unityWebRequest.SetRequestHeader("Content-Type", "application/octet-stream");
-            unityWebRequest.SetRequestHeader(ocpApimSubscriptionKeyHeader, authorizationKey);
-
-            // the download handler will help receiving the analysis from Azure
-            unityWebRequest.downloadHandler = new DownloadHandlerBuffer();
-
-            // the upload handler will help uploading the byte array with the request
-            unityWebRequest.uploadHandler = new UploadHandlerRaw(imageBytes);
-            unityWebRequest.uploadHandler.contentType = "application/octet-stream";
-
             yield return unityWebRequest.SendWebRequest();
-
-            long responseCode = unityWebRequest.responseCode;
-
-            try
+            if (unityWebRequest.isNetworkError || unityWebRequest.isHttpError)
             {
-                string jsonResponse = null;
-                jsonResponse = unityWebRequest.downloadHandler.text;
+                print(unityWebRequest.error);
+            }
+            else
+            {
+                print("Finished Uploading Screenshot");
+                String jsonresponse = unityWebRequest.downloadHandler.text;
 
-                // The response will be in Json format
-                // therefore it needs to be deserialized into the classes AnalysedObject and TagData
+                // Debug.Log(jsonresponse);
+
                 AnalysedObject analysedObject = new AnalysedObject();
-                analysedObject = JsonUtility.FromJson<AnalysedObject>(jsonResponse);
+                analysedObject = JsonUtility.FromJson<AnalysedObject>(jsonresponse);
 
-                if (analysedObject.tags == null)
-                {
-                    Debug.Log("analysedObject.tagData is null");
-                }
-                else
-                {
-                    Dictionary<string, float> tagsDictionary = new Dictionary<string, float>();
+                String img_str = analysedObject.img_str;
 
-                    foreach (TagData td in analysedObject.tags)
-                    {
-                        TagData tag = td as TagData;
-                        tagsDictionary.Add(tag.name, tag.confidence);
-                    }
+                byte[] img_bytes = System.Text.Encoding.ASCII.GetBytes(img_str);
 
-                    ResultsLabel.instance.SetTagsToLastLabel(tagsDictionary);
-                }
+                Debug.Log(Application.dataPath);
+                //File.WriteAllBytes(Application.dataPath + "/../SavedScreen.jpg", img_bytes);
+                
+
+          
+
+                //byte[] b = tex.EncodeToPNG();
+                //UnityEngine.Object.Destroy(tex);
+                //File.WriteAllBytes(Application.dataPath + "/../SavedScreen.png", b);
+
+
+
+                String utf_string = System.Text.Encoding.UTF8.GetString(img_bytes);
+
+                //Write some text to the test.txt file
+                StreamWriter writer = new StreamWriter(textPath, true, System.Text.Encoding.UTF8);
+                writer.WriteLine(utf_string);
+                writer.Close();
+
+                // Convert Base64 Encoded string to Byte Array.
+                byte[] imageBytes = Convert.FromBase64String(utf_string);
+                File.WriteAllBytes(Application.dataPath + "/../SavedScreen.jpg", imageBytes);
+
+                // create a texture that can be drawn to the screen
+                tex = new Texture2D(2, 2);
+                tex.LoadImage(imageBytes);
+
+
+                GameObject go = GameObject.Find("RawImage");
+                UnityEngine.UI.RawImage m_RawImage = go.GetComponent<UnityEngine.UI.RawImage>();
+                m_RawImage.texture = tex;
+
+                //update_image = true;
+
             }
-            catch (Exception exception)
-            {
-                Debug.Log("Json exception.Message: " + exception.Message);
-            }
-
-            yield return null;
         }
+
+        //using (UnityWebRequest unityWebRequest = UnityWebRequest.Post(visionAnalysisEndpoint, webForm))
+        //{
+        //    // gets a byte array out of the saved image
+        //    imageBytes = GetImageAsByteArray(imagePath);
+        //    unityWebRequest.SetRequestHeader("Content-Type", "application/octet-stream");
+        //    unityWebRequest.SetRequestHeader(ocpApimSubscriptionKeyHeader, authorizationKey);
+
+        //    String s = Convert.ToBase64String(imageBytes);
+
+        //    // the download handler will help receiving the analysis from Azure
+        //    unityWebRequest.downloadHandler = new DownloadHandlerBuffer();
+
+        //    // the upload handler will help uploading the byte array with the request
+        //    unityWebRequest.uploadHandler = new UploadHandlerRaw(imageBytes);
+        //    unityWebRequest.uploadHandler.contentType = "application/octet-stream";
+
+        //    Debug.Log(s);
+
+        //    yield return unityWebRequest.SendWebRequest();
+
+        //    long responseCode = unityWebRequest.responseCode;
+
+        //    try
+        //    {
+        //        string jsonResponse = null;
+        //        jsonResponse = unityWebRequest.downloadHandler.text;
+
+        //        // The response will be in Json format
+        //        // therefore it needs to be deserialized into the classes AnalysedObject and TagData
+        //        AnalysedObject analysedObject = new AnalysedObject();
+        //        analysedObject = JsonUtility.FromJson<AnalysedObject>(jsonResponse);
+
+        //        if (analysedObject.tags == null)
+        //        {
+        //            Debug.Log("analysedObject.tagData is null");
+        //        }
+        //        else
+        //        {
+        //            Dictionary<string, float> tagsDictionary = new Dictionary<string, float>();
+
+        //            foreach (TagData td in analysedObject.tags)
+        //            {
+        //                TagData tag = td as TagData;
+        //                tagsDictionary.Add(tag.name, tag.confidence);
+        //            }
+
+        //            ResultsLabel.instance.SetTagsToLastLabel(tagsDictionary);
+        //        }
+        //    }
+        //    catch (Exception exception)
+        //    {
+        //        Debug.Log("Json exception.Message: " + exception.Message);
+        //    }
+
+        //    yield return null;
+        //}
     }
     
     /// <summary>

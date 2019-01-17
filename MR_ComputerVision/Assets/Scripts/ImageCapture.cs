@@ -7,7 +7,6 @@ using UnityEngine.XR.WSA.WebCam;
 public class ImageCapture : MonoBehaviour {
 
     public static ImageCapture instance;
-    public int tapsCount;
     private PhotoCapture photoCaptureObject = null;
     private GestureRecognizer recognizer;
     private bool currentlyCapturing = false;
@@ -60,9 +59,6 @@ public class ImageCapture : MonoBehaviour {
         {
             currentlyCapturing = true;
 
-            // increment taps count, used to name images when saving
-            tapsCount++;
-
             // Create a label in world space using the ResultsLabel class
             ResultsLabel.instance.CreateLabel();
 
@@ -79,6 +75,8 @@ public class ImageCapture : MonoBehaviour {
     {
         // Call StopPhotoMode once the image has successfully captured
         photoCaptureObject.StopPhotoModeAsync(OnStoppedPhotoMode);
+
+        Debug.Log("on captured photo to disk");
     }
 
     void OnStoppedPhotoMode(PhotoCapture.PhotoCaptureResult result)
@@ -101,6 +99,8 @@ public class ImageCapture : MonoBehaviour {
 
         Texture2D targetTexture = new Texture2D(cameraResolution.width, cameraResolution.height);
 
+        Debug.Log("execute image capture and analysis");
+
         // Begin capture process, set the image format    
         PhotoCapture.CreateAsync(false, delegate (PhotoCapture captureObject)
         {
@@ -114,12 +114,14 @@ public class ImageCapture : MonoBehaviour {
             // Capture the image from the camera and save it in the App internal folder    
             captureObject.StartPhotoModeAsync(camParameters, delegate (PhotoCapture.PhotoCaptureResult result)
             {
-                string filename = string.Format(@"CapturedImage{0}.jpg", tapsCount);
+                string filename = @"current_image.jpg";
+
+                Debug.Log(Application.persistentDataPath);
 
                 string filePath = Path.Combine(Application.persistentDataPath, filename);
 
                 VisionManager.instance.imagePath = filePath;
-
+                
                 photoCaptureObject.TakePhotoAsync(filePath, PhotoCaptureFileOutputFormat.JPG, OnCapturedPhotoToDisk);
 
                 currentlyCapturing = false;
