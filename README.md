@@ -90,7 +90,7 @@ docker run -it --entrypoint /bin/bash -p 80:80 -v $(pwd)/data:/main/data arart
         - department
         - Culture
         - artistRole
-        - objectEndData
+        - objectEndDate
         - medium
         - creditLine
         - geographyType
