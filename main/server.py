@@ -73,8 +73,6 @@ def endpoint():
             items_info=items_info
         )
 
-        print(data)
-
         return jsonify(data)
 
 if __name__ == '__main__':
