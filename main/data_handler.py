@@ -34,7 +34,7 @@ class DataHandler(object):
             if type(original_val) == np.bool_:
                 new_val = 1.0 if original_val else 0.0
             elif type(original_val) == str:
-                continue
+                pass
             elif type(original_val) == np.int64:
                 new_val = int(original_val)
             elif type(original_val) == np.float64:

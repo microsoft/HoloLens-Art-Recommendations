@@ -84,11 +84,25 @@ docker run -it --entrypoint /bin/bash -p 80:80 -v $(pwd)/data:/main/data arart
 ## Frontend
 > Here we explain the Microsoft Hololens application. We link some important tutorials and then explain where we deviate to create a custom experience with our custom HTTP endpoint.
 
+1. Choose what to display
+    - Title (always)
+    - when available:
+        - department
+        - Culture
+        - artistRole
+        - objectEndData
+        - medium
+        - creditLine
+        - geographyType
+        - classification
+
+
 # TODO
 
 - [ ] verify all data paths are correct in notebooks and server code
 - [ ] put data in a place where it can be grabbed if desired
 - [ ] accidentally committed private key in VisionManager.cs, so fix this in git is possible.
+- [ ] mount the python files instead of creating the image with them inside
 
 
 
