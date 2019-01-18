@@ -45,18 +45,35 @@ def endpoint():
         img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
 
         # construct information list from the k_closest_list
-        items = {}
+        items_info = []
         ordering = []
         for objectid, _ in k_closest_list:
-            items[objectid] = data_handler.get_info_from_objectid(objectid)
             ordering.append(objectid)
+
+            information = data_handler.get_info_from_objectid(objectid)
+            # go through the information and create a list from it
+
+            information_list = []
+            for key, value in information.items():
+                information_list.append(
+                    {"title": key, "description": value}
+                )
+
+            items_info.append(
+                dict(
+                    objectid=objectid,
+                    information=information_list
+                )
+            )
 
 
         data = dict(
             img_str=img_str,
             ordering=ordering,
-            items=items
+            items_info=items_info
         )
+
+        print(data)
 
         return jsonify(data)
 
