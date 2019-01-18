@@ -31,28 +31,14 @@ public class ResultsLabel : MonoBehaviour
     /// </summary>
     public void CreateLabel()
     {
-        // lastLabelPlaced = Instantiate(labelPrefab, cursor.transform.position, transform.rotation);
+        // ethan commented this out to stay with a single label
+        lastLabelPlaced = Instantiate(labelPrefab, cursor.transform.position, transform.rotation);
 
         lastLabelPlacedText = lastLabelPlaced.GetComponent<TextMesh>();
 
         // Change the text of the label to show that has been placed
         // The final text will be set at a later stage
-        lastLabelPlacedText.text = "Analysing...";
+        // lastLabelPlacedText.text = "Analysing...";
     }
-
-    /// <summary>
-    /// Set the Tags as Text of the last Label created. 
-    /// </summary>
-    public void SetTagsToLastLabel(Dictionary<string, float> tagsDictionary)
-    {
-        lastLabelPlacedText = lastLabelPlaced.GetComponent<TextMesh>();
-
-        // At this point we go through all the tags received and set them as text of the label
-        lastLabelPlacedText.text = "I see: \n";
-
-        foreach (KeyValuePair<string, float> tag in tagsDictionary)
-        {
-            lastLabelPlacedText.text += tag.Key + ", Confidence: " + tag.Value.ToString("0.00 \n");
-        }
-    }
+    
 }

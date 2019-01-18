@@ -5,34 +5,42 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.Experimental.UIElements;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class VisionManager : MonoBehaviour {
 
+    // the custom endpoint to make the request at
+    public static string endpoint = "http://localhost:5000/endpoint";
+    public AnalysedObject analysedObject;
+    public Dictionary<string, Dictionary<string, string>> masterdictionary;
+
+
     [System.Serializable]
-    public class TagData
+    public class Info
     {
-        public string name;
-        //public float confidence;
+        public string title;
+        public string description;
+    }
+
+    [System.Serializable]
+    public class Item
+    {
+        public string objectid;
+        public Info[] information;
     }
 
     [System.Serializable]
     public class AnalysedObject
     {
         public string img_str;
-        //public string requestId;
-        //public object metadata;
+        public List<int> ordering;
+        public Item[] items_info;
     }
 
     public static VisionManager instance;
 
     public Texture2D tex;
-    public bool update_image;
-
-    // you must insert your service key here!    
-    private string authorizationKey = "ab5992b690a447ec84d4b4d40138dfc2";
-    private const string ocpApimSubscriptionKeyHeader = "Ocp-Apim-Subscription-Key";
-    private string visionAnalysisEndpoint = "https://eastus.api.cognitive.microsoft.com/vision/v1.0/analyze?visualFeatures=Tags";   // This is where you need to update your endpoint, if you set your location to something other than west-us.
-
+    
     internal byte[] imageBytes;
 
     internal string imagePath;
@@ -42,10 +50,6 @@ public class VisionManager : MonoBehaviour {
     {
         // allows this instance to behave like a singleton
         instance = this;
-
-        textPath = Path.Combine(Application.persistentDataPath, "img_str.txt");
-
-        update_image = false;
     }
 
     /// <summary>
@@ -60,7 +64,9 @@ public class VisionManager : MonoBehaviour {
         String s = Convert.ToBase64String(imageBytes);
         webForm.AddField("image", s);
 
-        using (UnityWebRequest unityWebRequest = UnityWebRequest.Post("http://localhost:5000/endpoint", webForm))
+        ResultsLabel.instance.lastLabelPlaced.GetComponent<TextMesh>().text = "sending query";
+
+        using (UnityWebRequest unityWebRequest = UnityWebRequest.Post(endpoint, webForm))
         {
             yield return unityWebRequest.SendWebRequest();
             if (unityWebRequest.isNetworkError || unityWebRequest.isHttpError)
@@ -70,112 +76,146 @@ public class VisionManager : MonoBehaviour {
             else
             {
                 print("Finished Uploading Screenshot");
-                String jsonresponse = unityWebRequest.downloadHandler.text;
+                String json_response_text = unityWebRequest.downloadHandler.text;
 
-                // Debug.Log(jsonresponse);
+                analysedObject = new AnalysedObject();
+                analysedObject = JsonUtility.FromJson<AnalysedObject>(json_response_text);
 
-                AnalysedObject analysedObject = new AnalysedObject();
-                analysedObject = JsonUtility.FromJson<AnalysedObject>(jsonresponse);
+                masterdictionary = GetDictFromJsonText(analysedObject);
 
-                String img_str = analysedObject.img_str;
+                // get the first objectid
+                string current_objectid = analysedObject.items_info[0].objectid;
 
-                byte[] img_bytes = System.Text.Encoding.ASCII.GetBytes(img_str);
+                // set the title
+                WriteTitle(masterdictionary, current_objectid);
 
-                Debug.Log(Application.dataPath);
-                //File.WriteAllBytes(Application.dataPath + "/../SavedScreen.jpg", img_bytes);
+                // set the information
+                WriteInformation(masterdictionary, current_objectid);
+
+                // set the image from the base64 string
+                WriteImageToScreenFromBase64(analysedObject.img_str);
                 
-
-          
-
-                //byte[] b = tex.EncodeToPNG();
-                //UnityEngine.Object.Destroy(tex);
-                //File.WriteAllBytes(Application.dataPath + "/../SavedScreen.png", b);
-
-
-
-                String utf_string = System.Text.Encoding.UTF8.GetString(img_bytes);
-
-                //Write some text to the test.txt file
-                StreamWriter writer = new StreamWriter(textPath, true, System.Text.Encoding.UTF8);
-                writer.WriteLine(utf_string);
-                writer.Close();
-
-                // Convert Base64 Encoded string to Byte Array.
-                byte[] imageBytes = Convert.FromBase64String(utf_string);
-                File.WriteAllBytes(Application.dataPath + "/../SavedScreen.jpg", imageBytes);
-
-                // create a texture that can be drawn to the screen
-                tex = new Texture2D(2, 2);
-                tex.LoadImage(imageBytes);
-
-
-                GameObject go = GameObject.Find("RawImage");
-                UnityEngine.UI.RawImage m_RawImage = go.GetComponent<UnityEngine.UI.RawImage>();
-                m_RawImage.texture = tex;
-
-                //update_image = true;
 
             }
         }
-
-        //using (UnityWebRequest unityWebRequest = UnityWebRequest.Post(visionAnalysisEndpoint, webForm))
-        //{
-        //    // gets a byte array out of the saved image
-        //    imageBytes = GetImageAsByteArray(imagePath);
-        //    unityWebRequest.SetRequestHeader("Content-Type", "application/octet-stream");
-        //    unityWebRequest.SetRequestHeader(ocpApimSubscriptionKeyHeader, authorizationKey);
-
-        //    String s = Convert.ToBase64String(imageBytes);
-
-        //    // the download handler will help receiving the analysis from Azure
-        //    unityWebRequest.downloadHandler = new DownloadHandlerBuffer();
-
-        //    // the upload handler will help uploading the byte array with the request
-        //    unityWebRequest.uploadHandler = new UploadHandlerRaw(imageBytes);
-        //    unityWebRequest.uploadHandler.contentType = "application/octet-stream";
-
-        //    Debug.Log(s);
-
-        //    yield return unityWebRequest.SendWebRequest();
-
-        //    long responseCode = unityWebRequest.responseCode;
-
-        //    try
-        //    {
-        //        string jsonResponse = null;
-        //        jsonResponse = unityWebRequest.downloadHandler.text;
-
-        //        // The response will be in Json format
-        //        // therefore it needs to be deserialized into the classes AnalysedObject and TagData
-        //        AnalysedObject analysedObject = new AnalysedObject();
-        //        analysedObject = JsonUtility.FromJson<AnalysedObject>(jsonResponse);
-
-        //        if (analysedObject.tags == null)
-        //        {
-        //            Debug.Log("analysedObject.tagData is null");
-        //        }
-        //        else
-        //        {
-        //            Dictionary<string, float> tagsDictionary = new Dictionary<string, float>();
-
-        //            foreach (TagData td in analysedObject.tags)
-        //            {
-        //                TagData tag = td as TagData;
-        //                tagsDictionary.Add(tag.name, tag.confidence);
-        //            }
-
-        //            ResultsLabel.instance.SetTagsToLastLabel(tagsDictionary);
-        //        }
-        //    }
-        //    catch (Exception exception)
-        //    {
-        //        Debug.Log("Json exception.Message: " + exception.Message);
-        //    }
-
-        //    yield return null;
-        //}
     }
-    
+
+    public void SetAllInfoFromObjectIDIndex(int index)
+    {
+
+        string current_objectid = analysedObject.items_info[index].objectid;
+
+        // set the title
+        WriteTitle(masterdictionary, current_objectid);
+
+        // set the information
+        WriteInformation(masterdictionary, current_objectid);
+
+        // set the position of the highlight game object
+        GameObject highlight_panel = GameObject.Find("HighlightPanel");
+        Debug.Log(highlight_panel.transform.localPosition);
+        highlight_panel.transform.localPosition = new Vector3((index * 20) + 10 - 50, highlight_panel.transform.localPosition.y, highlight_panel.transform.localPosition.z);
+    }
+
+    public void WriteImageToScreenFromBase64(string base64_string)
+    {
+        // update the image with the base64 string of the k nearest neighbors image
+
+        // get the bytes from the base64 image string
+        // had to do a few conversions to make it correct for the texture steps
+        byte[] image_bytes = System.Text.Encoding.ASCII.GetBytes(base64_string);
+        String utf_string = System.Text.Encoding.UTF8.GetString(image_bytes);
+        image_bytes = Convert.FromBase64String(utf_string);
+
+        // create a texture that can be drawn to the screen
+        // the size will be overwritten by the byte data anyways
+        tex = new Texture2D(2, 2);
+        tex.LoadImage(image_bytes);
+
+        // write the texture image to the correct place
+        GameObject similarity_image_object = GameObject.Find("SimilarityImage");
+        UnityEngine.UI.RawImage similarity_raw_image = similarity_image_object.GetComponent<UnityEngine.UI.RawImage>();
+        similarity_raw_image.texture = tex;
+    }
+
+    public Dictionary<string, Dictionary<string, string>> GetDictFromJsonText(AnalysedObject analysedObject)
+    {
+        
+        Dictionary<string, Dictionary<string, string>> masterdictionary = new Dictionary<string, Dictionary<string, string>>();
+
+
+        foreach (Item i in analysedObject.items_info)
+        {
+            Debug.Log(i.objectid);
+
+            Dictionary<string, string> EmployeeList = new Dictionary<string, string>();
+
+            foreach (Info info in i.information)
+            {
+                Debug.Log(info.title);
+                Debug.Log(info.description);
+
+                EmployeeList.Add(info.title, info.description);
+            }
+
+            masterdictionary.Add(i.objectid, EmployeeList);
+        }
+
+        return masterdictionary;
+
+    }
+
+    public void WriteTitle(Dictionary<string, Dictionary<string, string>> all_object_information, string objectid)
+    {
+        // this writes the title for the relevant objectid
+
+        // get the title and write it to the relevant section
+        GameObject title = GameObject.Find("Title");
+        Text title_text = title.GetComponent<Text>();
+        title_text.text = all_object_information[objectid]["title"];
+    }
+
+    public void WriteInformation(Dictionary<string, Dictionary<string, string>> all_object_information, string objectid)
+    {
+        // this function will get the game object and write the relevant text
+
+        GameObject information_object = GameObject.Find("Information");
+        Text information_text = information_object.GetComponent<Text>();
+
+        // TODO(ethan): adjust this based on the amount of text
+        // set some font attributes
+        information_text.fontSize = 4;
+
+        // this variable is used to update the actual drawing
+        String information_string = "";
+
+        // list of the relevant sections to check for
+        var relevant_list = new List<string>()
+        {
+            "department",
+            "culture",
+            "artistRole",
+            "objectEndDate",
+            "medium",
+            "creditLine",
+            "geographyType",
+            "classificaiton"
+        };
+
+        // iterate through the relevant sections and check if in the dictionary
+        foreach (var label in relevant_list)
+        {
+            if (all_object_information[objectid].ContainsKey(label))
+            {
+                information_string += label + ": " + all_object_information[objectid][label] + "; ";
+            }
+        }
+
+        // finally set the text with the relevant information
+        information_text.text = information_string;
+
+    }
+
     /// <summary>
     /// Returns the contents of the specified file as a byte array.
     /// </summary>
@@ -186,13 +226,4 @@ public class VisionManager : MonoBehaviour {
         return binaryReader.ReadBytes((int)fileStream.Length);
     }
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }
