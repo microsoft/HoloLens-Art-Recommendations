@@ -21,8 +21,9 @@ public class ImageClickHandler : MonoBehaviour, IPointerClickHandler {
 
         // min and max values are 214 and 705
         float x = eventData.pressPosition.x;
+        Debug.Log(x);
 
-        float x_normalized = (x - 214) / (705 - 214);
+        float x_normalized = (x - 310) / (607 - 310);
         Debug.Log(x_normalized);
 
         int objectid_index = (int)(x_normalized / 0.20);

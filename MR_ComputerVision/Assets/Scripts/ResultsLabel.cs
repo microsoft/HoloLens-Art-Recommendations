@@ -23,7 +23,7 @@ public class ResultsLabel : MonoBehaviour
 
     public void Start()
     {
-        lastLabelPlaced = Instantiate(labelPrefab, cursor.transform.position, transform.rotation);
+        // lastLabelPlaced = Instantiate(labelPrefab, cursor.transform.position, transform.rotation);
     }
 
     /// <summary>
@@ -34,7 +34,7 @@ public class ResultsLabel : MonoBehaviour
         // ethan commented this out to stay with a single label
         lastLabelPlaced = Instantiate(labelPrefab, cursor.transform.position, transform.rotation);
 
-        lastLabelPlacedText = lastLabelPlaced.GetComponent<TextMesh>();
+        // lastLabelPlacedText = lastLabelPlaced.GetComponent<TextMesh>();
 
         // Change the text of the label to show that has been placed
         // The final text will be set at a later stage

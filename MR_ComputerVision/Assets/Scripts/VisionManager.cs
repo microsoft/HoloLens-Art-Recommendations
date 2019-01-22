@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using UnityEngine;
 using UnityEngine.Experimental.UIElements;
 using UnityEngine.Networking;
@@ -64,7 +65,7 @@ public class VisionManager : MonoBehaviour {
         String s = Convert.ToBase64String(imageBytes);
         webForm.AddField("image", s);
 
-        ResultsLabel.instance.lastLabelPlaced.GetComponent<TextMesh>().text = "sending query";
+        // ResultsLabel.instance.lastLabelPlaced.GetComponent<TextMesh>().text = "sending query";
 
         using (UnityWebRequest unityWebRequest = UnityWebRequest.Post(endpoint, webForm))
         {
@@ -112,7 +113,8 @@ public class VisionManager : MonoBehaviour {
         WriteInformation(masterdictionary, current_objectid);
 
         // set the position of the highlight game object
-        GameObject highlight_panel = GameObject.Find("HighlightPanel");
+        GameObject highlight_panel = ResultsLabel.instance.lastLabelPlaced.transform.Find("SimilarityImage").gameObject.transform.Find("HighlightPanel").gameObject;
+        // GameObject highlight_panel = GameObject.Find("HighlightPanel");
         Debug.Log(highlight_panel.transform.localPosition);
         highlight_panel.transform.localPosition = new Vector3((index * 20) + 10 - 50, highlight_panel.transform.localPosition.y, highlight_panel.transform.localPosition.z);
     }
@@ -133,7 +135,8 @@ public class VisionManager : MonoBehaviour {
         tex.LoadImage(image_bytes);
 
         // write the texture image to the correct place
-        GameObject similarity_image_object = GameObject.Find("SimilarityImage");
+        GameObject similarity_image_object = ResultsLabel.instance.lastLabelPlaced.transform.Find("SimilarityImage").gameObject;
+        // GameObject similarity_image_object = GameObject.Find("SimilarityImage");
         UnityEngine.UI.RawImage similarity_raw_image = similarity_image_object.GetComponent<UnityEngine.UI.RawImage>();
         similarity_raw_image.texture = tex;
     }
@@ -170,7 +173,8 @@ public class VisionManager : MonoBehaviour {
         // this writes the title for the relevant objectid
 
         // get the title and write it to the relevant section
-        GameObject title = GameObject.Find("Title");
+        GameObject title = ResultsLabel.instance.lastLabelPlaced.transform.Find("Title").gameObject;
+        // GameObject title = GameObject.Find("Title");
         Text title_text = title.GetComponent<Text>();
         title_text.text = all_object_information[objectid]["title"];
     }
@@ -178,8 +182,8 @@ public class VisionManager : MonoBehaviour {
     public void WriteInformation(Dictionary<string, Dictionary<string, string>> all_object_information, string objectid)
     {
         // this function will get the game object and write the relevant text
-
-        GameObject information_object = GameObject.Find("Information");
+        GameObject information_object = ResultsLabel.instance.lastLabelPlaced.transform.Find("Information").gameObject;
+        // GameObject information_object = GameObject.Find("Information");
         Text information_text = information_object.GetComponent<Text>();
 
         // TODO(ethan): adjust this based on the amount of text
