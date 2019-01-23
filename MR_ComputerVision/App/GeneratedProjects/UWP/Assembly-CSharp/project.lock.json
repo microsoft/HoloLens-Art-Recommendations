@@ -15996,12 +15996,12 @@
   },
   "project": {
     "restore": {
-      "projectUniqueName": "C:\\Users\\v-etwebe\\Documents\\MR_ComputerVision\\App\\GeneratedProjects\\UWP\\Assembly-CSharp\\Assembly-CSharp.csproj",
+      "projectUniqueName": "C:\\Users\\v-etwebe\\Documents\\arart\\MR_ComputerVision\\App\\GeneratedProjects\\UWP\\Assembly-CSharp\\Assembly-CSharp.csproj",
       "projectName": "Assembly-CSharp",
-      "projectPath": "C:\\Users\\v-etwebe\\Documents\\MR_ComputerVision\\App\\GeneratedProjects\\UWP\\Assembly-CSharp\\Assembly-CSharp.csproj",
-      "projectJsonPath": "C:\\Users\\v-etwebe\\Documents\\MR_ComputerVision\\App\\GeneratedProjects\\UWP\\Assembly-CSharp\\project.json",
+      "projectPath": "C:\\Users\\v-etwebe\\Documents\\arart\\MR_ComputerVision\\App\\GeneratedProjects\\UWP\\Assembly-CSharp\\Assembly-CSharp.csproj",
+      "projectJsonPath": "C:\\Users\\v-etwebe\\Documents\\arart\\MR_ComputerVision\\App\\GeneratedProjects\\UWP\\Assembly-CSharp\\project.json",
       "packagesPath": "C:\\Users\\v-etwebe\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\v-etwebe\\Documents\\MR_ComputerVision\\App\\GeneratedProjects\\UWP\\Assembly-CSharp\\obj\\",
+      "outputPath": "C:\\Users\\v-etwebe\\Documents\\arart\\MR_ComputerVision\\App\\GeneratedProjects\\UWP\\Assembly-CSharp\\obj\\",
       "projectStyle": "ProjectJson",
       "configFilePaths": [
         "C:\\Users\\v-etwebe\\AppData\\Roaming\\NuGet\\NuGet.Config",

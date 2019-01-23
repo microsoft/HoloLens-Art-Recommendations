@@ -11,7 +11,7 @@ using UnityEngine.UI;
 public class VisionManager : MonoBehaviour {
 
     // the custom endpoint to make the request at
-    public static string endpoint = "http://localhost:5000/endpoint";
+    public static string endpoint = "http://40.117.114.194:5000/endpoint";
     public AnalysedObject analysedObject;
     public Dictionary<string, Dictionary<string, string>> masterdictionary;
 
@@ -101,8 +101,14 @@ public class VisionManager : MonoBehaviour {
         }
     }
 
-    public void SetAllInfoFromObjectIDIndex(int index)
+    public void SetAllInfoFromObjectIDIndex(int index, GameObject similarity_image)
     {
+
+        // set the position of the highlight game object
+        GameObject highlight_panel = similarity_image.transform.Find("HighlightPanel").gameObject;
+        // GameObject highlight_panel = GameObject.Find("HighlightPanel");
+        Debug.Log(highlight_panel.transform.localPosition);
+        highlight_panel.transform.localPosition = new Vector3((index * 20) + 10 - 50, highlight_panel.transform.localPosition.y, highlight_panel.transform.localPosition.z);
 
         string current_objectid = analysedObject.items_info[index].objectid;
 
@@ -111,12 +117,6 @@ public class VisionManager : MonoBehaviour {
 
         // set the information
         WriteInformation(masterdictionary, current_objectid);
-
-        // set the position of the highlight game object
-        GameObject highlight_panel = ResultsLabel.instance.lastLabelPlaced.transform.Find("SimilarityImage").gameObject.transform.Find("HighlightPanel").gameObject;
-        // GameObject highlight_panel = GameObject.Find("HighlightPanel");
-        Debug.Log(highlight_panel.transform.localPosition);
-        highlight_panel.transform.localPosition = new Vector3((index * 20) + 10 - 50, highlight_panel.transform.localPosition.y, highlight_panel.transform.localPosition.z);
     }
 
     public void WriteImageToScreenFromBase64(string base64_string)

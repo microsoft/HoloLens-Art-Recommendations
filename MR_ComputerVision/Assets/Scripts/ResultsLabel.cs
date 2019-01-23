@@ -32,7 +32,10 @@ public class ResultsLabel : MonoBehaviour
     public void CreateLabel()
     {
         // ethan commented this out to stay with a single label
-        lastLabelPlaced = Instantiate(labelPrefab, cursor.transform.position, transform.rotation);
+        Vector3 vec = cursor.transform.position;
+        //vec[0] += Random.Range(-1.0f, 1.0f);
+        //vec[2] += Random.Range(-1.0f, 1.0f);
+        lastLabelPlaced = Instantiate(labelPrefab, vec, transform.rotation);
 
         // lastLabelPlacedText = lastLabelPlaced.GetComponent<TextMesh>();
 
