@@ -115,28 +115,26 @@ After successful docker deployment, this server will now be accessible at the IP
 # Frontend
 > Here we explain the Microsoft Hololens application. We link some important tutorials and then explain where we deviate to create a custom experience with our custom HTTP endpoint. We use Unity for development, test with the Hololens emulator, and finally deploy to the Hololens device itself for demo purposes.
 
-1. Choose what to display
-    - Title (always)
-    - when available:
-        - department
-        - Culture
-        - artistRole
-        - objectEndDate
-        - medium
-        - creditLine
-        - geographyType
-        - classification
+1. Getting Unity Set Up for Development
+> Getting Unity set up for the Hololens is beyond the scope of this project, so we make references to tutorials to get everything set up.
 
+Follow [this tutorial](https://docs.microsoft.com/en-us/windows/mixed-reality/mr-azure-302) to get set up with Unity and Hololens development.
 
-# TODO
+2. Deciding Information to Display
+> In the Unity code, we have a list specifying what type of information to display on the AR information UI panels. This list describes the fields that are available in the .csv that was created as part of the data formatting.
 
-- [ ] verify all data paths are correct in notebooks and server code
-- [ ] put data in a place where it can be grabbed if desired
-- [ ] accidentally committed private key in VisionManager.cs, so fix this in git is possible.
-- [ ] mount the python files instead of creating the image with them inside
-- two things left
-    - putting endpoint on a public IP and making it accessible
-    - using a second gesture other than tap (hold?)
+Here is an example of topics to display for a given art piece:
+- Title
+    - department
+    - Culture
+    - artistRole
+    - objectEndDate
+    - medium
+    - creditLine
+    - geographyType
+    - classification
+
+Note that form the topics listed above, only the ones that are included in the POST response are written in the Unity world. This is important because sometimes not all entries are available int he .csv file. The assumption is made that the "Title" field is always present because every object in the dataset should (hopefully) have a name.
 
 
 
