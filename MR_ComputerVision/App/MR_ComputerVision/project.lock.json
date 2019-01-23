@@ -16071,12 +16071,12 @@
   },
   "project": {
     "restore": {
-      "projectUniqueName": "C:\\Users\\v-etwebe\\Documents\\MR_ComputerVision\\App\\MR_ComputerVision\\MR_ComputerVision.csproj",
+      "projectUniqueName": "C:\\Users\\v-etwebe\\Documents\\arart\\MR_ComputerVision\\App\\MR_ComputerVision\\MR_ComputerVision.csproj",
       "projectName": "MR_ComputerVision",
-      "projectPath": "C:\\Users\\v-etwebe\\Documents\\MR_ComputerVision\\App\\MR_ComputerVision\\MR_ComputerVision.csproj",
-      "projectJsonPath": "C:\\Users\\v-etwebe\\Documents\\MR_ComputerVision\\App\\MR_ComputerVision\\project.json",
+      "projectPath": "C:\\Users\\v-etwebe\\Documents\\arart\\MR_ComputerVision\\App\\MR_ComputerVision\\MR_ComputerVision.csproj",
+      "projectJsonPath": "C:\\Users\\v-etwebe\\Documents\\arart\\MR_ComputerVision\\App\\MR_ComputerVision\\project.json",
       "packagesPath": "C:\\Users\\v-etwebe\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\v-etwebe\\Documents\\MR_ComputerVision\\App\\MR_ComputerVision\\obj\\",
+      "outputPath": "C:\\Users\\v-etwebe\\Documents\\arart\\MR_ComputerVision\\App\\MR_ComputerVision\\obj\\",
       "projectStyle": "ProjectJson",
       "configFilePaths": [
         "C:\\Users\\v-etwebe\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -16089,8 +16089,8 @@
       "frameworks": {
         "uap10.0.10240": {
           "projectReferences": {
-            "C:\\Users\\v-etwebe\\Documents\\MR_ComputerVision\\App\\GeneratedProjects\\UWP\\Assembly-CSharp\\Assembly-CSharp.csproj": {
-              "projectPath": "C:\\Users\\v-etwebe\\Documents\\MR_ComputerVision\\App\\GeneratedProjects\\UWP\\Assembly-CSharp\\Assembly-CSharp.csproj"
+            "C:\\Users\\v-etwebe\\Documents\\arart\\MR_ComputerVision\\App\\GeneratedProjects\\UWP\\Assembly-CSharp\\Assembly-CSharp.csproj": {
+              "projectPath": "C:\\Users\\v-etwebe\\Documents\\arart\\MR_ComputerVision\\App\\GeneratedProjects\\UWP\\Assembly-CSharp\\Assembly-CSharp.csproj"
             }
           }
         }

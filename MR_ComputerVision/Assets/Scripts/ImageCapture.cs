@@ -15,7 +15,6 @@ public class ImageCapture : MonoBehaviour {
     {
         // Allows this instance to behave like a singleton
         instance = this;
-
     }
 
     void Start()
@@ -30,7 +29,7 @@ public class ImageCapture : MonoBehaviour {
     void Update()
     {
         // space bar manually triggers a picture event
-        // this is used for running in unity
+        // this is used for running in unity, which is equivalent to TapHandler
         if (Input.GetKeyDown("space"))
         {
             print("space key was pressed");
@@ -76,7 +75,7 @@ public class ImageCapture : MonoBehaviour {
         // Call StopPhotoMode once the image has successfully captured
         photoCaptureObject.StopPhotoModeAsync(OnStoppedPhotoMode);
 
-        Debug.Log("on captured photo to disk");
+        // Debug.Log("on captured photo to disk");
     }
 
     void OnStoppedPhotoMode(PhotoCapture.PhotoCaptureResult result)
@@ -99,7 +98,7 @@ public class ImageCapture : MonoBehaviour {
 
         Texture2D targetTexture = new Texture2D(cameraResolution.width, cameraResolution.height);
 
-        Debug.Log("execute image capture and analysis");
+        // Debug.Log("execute image capture and analysis");
 
         // Begin capture process, set the image format    
         PhotoCapture.CreateAsync(false, delegate (PhotoCapture captureObject)
