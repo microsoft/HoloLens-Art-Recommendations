@@ -42,8 +42,14 @@ Note that we use `virtualenv` for local testing but `Docker` for deployment (whi
 Follow these notebooks in order to format the data properly. All data should end up in a nicely formatted `data` directory, which is located in the `main` folder (full path: `arart/main/data`). [`data`](main/data) should have an `images` folder with \<objectid>.jpg names and a \<filename>.csv file with data for each object.
 
 - [CreateDatasetFromMetAPI.ipynb](notebooks/CreateDatasetFromMetAPI.ipynb)
-    - This notebook simply queries the MET API to create a .csv file of entries with information for many of the objects in the museum.
+    - This notebook simply queries the MET API to create a .csv file of entries with information for many of the objects in the museum. The .csv file should look something like this.
+    
+    ![met_data](media/met_data.png)
+
 - [SaveImagesFromCsvURLs.ipynb](notebooks/SaveImagesFromCsvURLs.ipynb)
+
+    >Note that this file isn't needed if you have access to the images already. We perform this step because (as the image shows) we only have access to the image URLs and therefore have to download them.
+
     - Using the previously created .csv file, we go through the rows and download the images from the image URLs when they exist. We save these to the `images` folder named by their objectid.
 - [CreateFeaturesDictionary.ipynb](notebooks/CreateFeaturesDictionary.ipynb)
     - This notebook uses ResNet18 with weights pretrained on ImageNet (using PyTorch). Removing the last layer allows us to extract the feature vector, which encodes information pertaining to the class of the item. This allows us to use L2 distance between feature vectors to do image similarity comparisons. The feature vectors are created for all the images and stored as a serialized dictionary (as a pickle file) for quick loading and lookup used for performing image similarity search.
@@ -123,7 +129,7 @@ After successful docker deployment, this server will now be accessible at the IP
 1. Getting Unity Set Up for Development
 > Getting Unity set up for the Hololens is beyond the scope of this project, so we make references to tutorials to get everything set up.
 
-Follow [this tutorial](https://docs.microsoft.com/en-us/windows/mixed-reality/mr-azure-302) to get set up with Unity and Hololens development. The start code from this tutorial is used heavily to get this project up and running--hence the name of the Unity application folder that remains in our repo: [MR_ComputerVision](MR_ComputerVision).
+Follow [this tutorial](https://docs.microsoft.com/en-us/windows/mixed-reality/mr-azure-302) to get set up with Unity and Hololens development. The start code from this tutorial is used heavily to get this project up and running--hence the name of the Unity application folder that remains in our repo: [MR_ComputerVision](MR_ComputerVision). However, if your Unity development environment is already configured for Hololens and you understand how Unity app development works, feel free to load the code from the MR_ComputerVision](MR_ComputerVision) without following the referenced tutorial.
 
 2. Deciding Information to Display
 > In the Unity code, we have a list specifying what type of information to display on the AR information UI panels. This list describes the fields that are available in the .csv that was created as part of the data formatting.
@@ -139,7 +145,4 @@ Here is an example of topics to display for a given art piece:
     - geographyType
     - classification
 
-Note that form the topics listed above, only the ones that are included in the POST response are written in the Unity world. This is important because sometimes not all entries are available int he .csv file. The assumption is made that the "Title" field is always present because every object in the dataset should (hopefully) have a name.
-
-
-
+Note that form the topics listed above, only the ones that are included in the POST response are written in the Unity world. This is important because sometimes not all entries are available int he .csv file. The assumption is made that the "Title" field is always present because every object in the dataset should have a name.
