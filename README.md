@@ -2,7 +2,12 @@
 > This project demonstrates the potential for augmented reality in art museums. Here we outline an example of getting an application running from start to finish. This project makes use of data from [The Metropolitan Museum of Art (The MET) Collection API](https://metmuseum.github.io/), but code is written in way that it can be adapted to other data sources. The project consists of two major components, namely the `backend` (for data processing and web app endpoint deployment) and the `frontend` (Unity application for the Hololens). This README.md file and linked notebooks are used to illustrate the process of replicating this work.
 
 # Highlights
-\# todo(ethan): insert graphics / gifs / etc. to illustrate what the project will end up looking like
+
+This is the end results example where informative panels overlay on art pieces to display recommendations.
+![hololens_arart_demo_no_clicks](media/hololens_arart_demo_no_clicks.gif)
+
+Here are two examples of what the information panels look like and how to interact with them. Information is cached from the HTTP response, so the information update rate is quick.
+![example_gui_1](media/example_gui_1.gif) ![example_gui_2](media/example_gui_2.gif)
 
 # Local Development Setup
 > Set up a virtual environment for local development. The following are the steps to make this work in terminal with Linux/Unix commands.
