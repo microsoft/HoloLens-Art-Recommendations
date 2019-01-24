@@ -1,5 +1,5 @@
 # Augmented Reality Art Museum with the Microsoft Hololens
-> This project demonstrates the potential for augmented reality in art museums. Here we outline an example of getting an application running from start to finish. This project makes use of data from [The Metropolitan Museum of Art (The MET) Collection API](https://metmuseum.github.io/), but code is written in way that it can be adapted to other data sources. The project consists of two major components, namely the `backend` (for data processing and web app endpoint deployment) and the `frontend` (Unity application for the Hololens). This README.md file and linked notebooks are used to illustrate the process of replicating this work.
+> This project demonstrates the potential for augmented reality in art museums. Here we outline an example of getting an application running from start to finish. This project makes use of data from [The Metropolitan Museum of Art (The MET) Collection API](https://metmuseum.github.io/), but code is written in way that it can be adapted to other data sources. The project consists of two major components, namely the `backend` (for data processing and web app endpoint deployment) and the `frontend` (Unity application for the Hololens), in which we build off of [this tutorial](https://docs.microsoft.com/en-us/windows/mixed-reality/mr-azure-302). This README.md file and linked notebooks are used to illustrate the process of replicating this work.
 
 # Highlights
 
@@ -123,7 +123,7 @@ After successful docker deployment, this server will now be accessible at the IP
 1. Getting Unity Set Up for Development
 > Getting Unity set up for the Hololens is beyond the scope of this project, so we make references to tutorials to get everything set up.
 
-Follow [this tutorial](https://docs.microsoft.com/en-us/windows/mixed-reality/mr-azure-302) to get set up with Unity and Hololens development.
+Follow [this tutorial](https://docs.microsoft.com/en-us/windows/mixed-reality/mr-azure-302) to get set up with Unity and Hololens development. The start code from this tutorial is used heavily to get this project up and running--hence the name of the Unity application folder that remains in our repo: [MR_ComputerVision](MR_ComputerVision).
 
 2. Deciding Information to Display
 > In the Unity code, we have a list specifying what type of information to display on the AR information UI panels. This list describes the fields that are available in the .csv that was created as part of the data formatting.
