@@ -58,7 +58,7 @@ Make sure you have [Jupyter Notebook](https://jupyter.org/) installed and set up
 # start the notebook in the terminal
 jupyter notebook
 
-# navigate to the specified address
+# navigate to the specified address in a browser
 
 # in the web GUI
 click Kernel -> Change kernel -> arart
@@ -104,9 +104,9 @@ After running the server locally (not in Docker), it will be located at at `http
 
     # output format
     data = {
-        "img_str": base64 string a combined image of the similar items (left to right will be most similar to least similar),
+        "img_str": base64 string a combined image of the similar items (left to right will be most to least similar),
         "ordering": [objectid1, objectid2, etc.],
-        # the output is organized in this way to be easily formatted with Unity, which is described in the Unity code
+        # this output is organized in this way to be easily formatted with Unity, which is described in the Unity code
         "items_info": [
             {
                 "objectid": objectid1,
@@ -126,52 +126,79 @@ After running the server locally (not in Docker), it will be located at at `http
     }
     ```
 
-3. Deploying the Server as a Docker Application
-> We use Docker to create a replicable environment for deployment. This is helpful because it should work on any type of machine and maintain and consistent environment. Note that the application should be run on a computer with a public IP address because that's the easiest way for the Hololens emulator and device to get access to the endpoint.
+# Deploy Server in Docker Container on Azure VM
+> This section outlines how to get the endpoint running in an Azure VM such that is is accessible on a Public IP address. This allows the HoloLens to have access to it.
 
-```
-# navigate the directory with the Dockerfile 
-cd arart/main
+- **Create an Azure VM**
 
-# build the docker image in the directory
-docker build -t arart .
+    Follow [this guide](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-portal) to create a virtual machine in Azure. After successfully completing the steps in this document, you logged into the [Azure portal](https://ms.portal.azure.com). On the left pane, click "Virtual Machines" and navigate to the VM that you created. Click on it, and you should be in the "Overview" pane. In this section, you will see a "Public IP address" field with a value. Take note of this because you will use it to `ssh` into the VM to set up the server. To find your computer's IP address, you can go to go [http://www.whatsmyip.org/](http://www.whatsmyip.org/). See this page for more details regarding white
 
-# run the docker image. this will start the server as specified in the Dockerfile
-docker run -d -p 5000:80 -v $(pwd)/data:/main/data arart
+- **Access the VM and Set Up Server**
 
-# enter the container without starting the server right away.
-docker run -it --entrypoint /bin/bash -p 5000:80 -v $(pwd)/data:/main/data arart
+    Remote log into the VM by using a terminal and running the command `ssh "Public IP address"`, where "Public IP address" is the address noted in the previous section. If presented with an error, you most likely need to `whitelist` your IP address. In the same menu as where the "Overpane" was located, click and open the "Networking" pane. Here you can add an inbound port rule or modify an existing one to allow your IP address to be allowed to connect to the server's "Public IP address". See [this page](https://blogs.msdn.microsoft.com/pkirchner/2016/02/02/allow-incoming-web-traffic-to-web-server-in-azure-vm/) for more details regarding whitelisting your IP address. Finally, you'll want to open port 5000 to be accessible; this is the port the web server will be using. You open this port to any inbound IP address, or you could specify the IP addresses you want to give access to. In this more secure approach, you will have to whitelist the IP addresses of your laptop running Unity, the HoloLens emulator, and the HoloLens device itself (depending on what you are accessing the endpoint from at the time).
 
-# notes about the docker flags:
-# -d runs it in the background
-# -p binds a host port : to the docker port
-# -v mounts a host directory : to the docker container directory
-```
+    After remote logging into the VM (using `ssh "Public IP address"` and following the username & password prompts), you need to get the repository and data one the machine. This can be done in two ways: (1) clone the repo and run the data preprocessing scripts there, or (2) remote file copy the repository (with the `data` folder ready to go) to the machine. [This can be done with scp](https://stackabuse.com/copying-a-directory-with-scp/) on Linux/Unix. Option (2) may take some time depending on how many images are int the `data/images` folder.
 
-After successful docker deployment, this server will now be accessible at the IP address of the computer on port 5000. Note that the port can easily be changed by modifying the -p flag parameters.
+- **Create Docker Image and Start a Container**
 
-> Azure is an easy-to-use platform for hosting this server. Create a virtual machine, ssh into the machine, clone the repo, run the data processing notebooks (to create the image folder), then run the server with docker. In the Azure settings, port 5000 (or a different port) can be exposed. Now the endpoint will be accessible on a public IP address, which means the Hololens emulator and device can access it (provided they have internet connections).
+    Now we are ready to use Docker to deploy our Python server on the Azure VM's public IP address at port 5000. To complete the next steps, you will have to have Docker installed on the VM. Follow these steps to [install Docker](https://docs.docker.com/install/) if needed. Finally, keep in mind that all the following commands are run on in the Azure VM terminal.
 
-# Frontend
+    ```
+    # navigate the the repository
+    cd path/to/the/repository
+
+    # navigate the directory with the Dockerfile 
+    cd main
+
+    # build the docker image in the directory
+    docker build -t arart .
+
+    # run the docker image in a container
+    # this will start the server as specified in the Dockerfile
+    docker run -d -p 5000:5000 -v $(pwd)/data:/main/data arart
+
+    # (additional info) enter the container without starting the server right away
+    docker run -it --entrypoint /bin/bash -p 5000:5000 -v $(pwd)/data:/main/data arart
+
+    # (additional info) enter a docker container already running
+    docker ps # make not of the container id
+    docker exec -it <container id> bash
+
+    # notes about the docker flags:
+    # -d runs it in the background
+    # -p binds a host port : to the docker port
+    # -v mounts a host directory : to the docker container directory
+    ```
+
+*Sanity Check: After completing all of these steps and running the server, user a browser to navigate to http://"Public IP address":5000. "hello ar art app" should be written to the screen.*
+
+Please note that the parameters used in this tutorial are not strict and can be modified depending on user preferences. For example, a port other than 5000 could be used by modifying the -p flag parameter.
+
+# HoloLens Application
 > Here we explain the Microsoft Hololens application. We link some important tutorials and then explain where we deviate to create a custom experience with our custom HTTP endpoint. We use Unity for development, test with the Hololens emulator, and finally deploy to the Hololens device itself for demo purposes.
 
-1. Getting Unity Set Up for Development
-> Getting Unity set up for the Hololens is beyond the scope of this project, so we make references to tutorials to get everything set up.
+- **Set Up Unity to work with the HoloLens**
 
-Follow [this tutorial](https://docs.microsoft.com/en-us/windows/mixed-reality/mr-azure-302) to get set up with Unity and Hololens development. The start code from this tutorial is used heavily to get this project up and running--hence the name of the Unity application folder that remains in our repo: [MR_ComputerVision](MR_ComputerVision). However, if your Unity development environment is already configured for Hololens and you understand how Unity app development works, feel free to load the code from the MR_ComputerVision](MR_ComputerVision) without following the referenced tutorial.
+    Getting Unity set up for the Hololens is beyond the scope of this project, so we make references to Microsoft tutorials to get everything set up. Follow [this tutorial](https://docs.microsoft.com/en-us/windows/mixed-reality/mr-azure-302) to get set up with Unity and Hololens development. The start code from this tutorial is used heavily to get this project up and running--hence the name of the Unity application folder that remains in our repo: [MR_ComputerVision](MR_ComputerVision). However, if your Unity development environment is already configured for Hololens and you understand how Unity app development works, feel free to load the code directory from the [MR_ComputerVision](MR_ComputerVision) without following the referenced tutorial. Once comfortable enough with developing with Unity for the HoloLens, go ahead and load the Unity project from [MR_ComputerVision](MR_ComputerVision).
 
-2. Deciding Information to Display
-> In the Unity code, we have a list specifying what type of information to display on the AR information UI panels. This list describes the fields that are available in the .csv that was created as part of the data formatting.
+- **Some Notes about the Program**
 
-Here is an example of topics to display for a given art piece:
-- Title
-    - department
-    - Culture
-    - artistRole
-    - objectEndDate
-    - medium
-    - creditLine
-    - geographyType
-    - classification
+    This C# scripts are documented well, but here we make a few notes about things that need (or might need to be) changed before running the application.
 
-Note that form the topics listed above, only the ones that are included in the POST response are written in the Unity world. This is important because sometimes not all entries are available int he .csv file. The assumption is made that the "Title" field is always present because every object in the dataset should have a name.
+    - Changing Endpoint in the Code
+
+    - Deciding Art Piece Information to Display
+        - In the Unity code, we have a list specifying what type of information to display on the AR information UI panels. This list describes the fields that are available in the .csv that was created as part of the data formatting.
+        
+        - Here is an example of topics to display for a given art piece:
+            - Title
+                - department
+                - Culture
+                - artistRole
+                - objectEndDate
+                - medium
+                - creditLine
+                - geographyType
+                - classification
+                
+            Note that form the topics listed above, only the ones that are included in the POST response are written in the Unity world. This is important because sometimes not all entries are available in the .csv file. The assumption is made that the "Title" field is always present because every object in the dataset should have a name.
