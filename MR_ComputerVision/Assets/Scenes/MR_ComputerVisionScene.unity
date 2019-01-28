@@ -213,7 +213,6 @@ MonoBehaviour:
     img_str: 
     ordering: 
     items_info: []
-  tex: {fileID: 0}
 --- !u!114 &69394076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,7 +236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursor: {fileID: 903519017}
-  labelPrefab: {fileID: 224113215875822018, guid: 82cbf2eb6ea6dbc4e9d31863da9a01d3,
+  labelPrefab: {fileID: 224010663051264520, guid: 2b7afebddc4f88942a262995bf0ecbb4,
     type: 2}
   lastLabelPlaced: {fileID: 0}
   lastLabelPlacedText: {fileID: 0}

@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿// handle user input to take a picture and start the panel prefab creation
+
+using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.XR.WSA.Input;
@@ -32,6 +34,8 @@ public class ImageCapture : MonoBehaviour {
         // this is used for running in unity, which is equivalent to TapHandler
         if (Input.GetKeyDown("space"))
         {
+            // the space key in Unity run mode will do the same thing
+            // as a finger tap with the hololens
             print("space key was pressed");
 
             // Only allow capturing, if not currently processing a request.
@@ -39,7 +43,7 @@ public class ImageCapture : MonoBehaviour {
             {
                 currentlyCapturing = true;
 
-                // Create a label in world space using the ResultsLabel class
+                // Create a panel in world space using the ResultsLabel class
                 ResultsLabel.instance.CreateLabel();
 
                 // Begins the image capture and analysis procedure

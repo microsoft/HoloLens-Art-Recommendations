@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿// this will keep track of the information panel prefabs and instantiate them
+
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ResultsLabel : MonoBehaviour
@@ -7,8 +9,11 @@ public class ResultsLabel : MonoBehaviour
 
     public GameObject cursor;
 
+    // this is the prefab that will be instantiated when the user clicks the world and takes a picture
+    // with the hololens
     public Transform labelPrefab;
 
+    // keep track of the last label placed in the world in case we wan't to use that info at some point
     [HideInInspector]
     public Transform lastLabelPlaced;
 
@@ -23,7 +28,6 @@ public class ResultsLabel : MonoBehaviour
 
     public void Start()
     {
-        // lastLabelPlaced = Instantiate(labelPrefab, cursor.transform.position, transform.rotation);
     }
 
     /// <summary>
@@ -31,17 +35,9 @@ public class ResultsLabel : MonoBehaviour
     /// </summary>
     public void CreateLabel()
     {
-        // ethan commented this out to stay with a single label
+        // set the position of the label panel
         Vector3 vec = cursor.transform.position;
-        //vec[0] += Random.Range(-1.0f, 1.0f);
-        //vec[2] += Random.Range(-1.0f, 1.0f);
         lastLabelPlaced = Instantiate(labelPrefab, vec, transform.rotation);
-
-        // lastLabelPlacedText = lastLabelPlaced.GetComponent<TextMesh>();
-
-        // Change the text of the label to show that has been placed
-        // The final text will be set at a later stage
-        // lastLabelPlacedText.text = "Analysing...";
     }
     
 }

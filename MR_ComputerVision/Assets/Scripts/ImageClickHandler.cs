@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿// handle the clicks on the panel with this class
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -18,16 +20,6 @@ public class ImageClickHandler : MonoBehaviour, IPointerClickHandler {
             return;
 
         float x = localCursor[0];
-
-        // for some reaosn worldPosition is always 0,0,0
-        // TODO(ethan): fix this bug
-        //Debug.Log(eventData.pointerCurrentRaycast.worldPosition);
-
-        //Debug.Log("game position");
-        //Debug.Log(transform.position);
-        // min and max values are 214 and 705
-        //float x = eventData.pressPosition.x;
-        //Debug.Log(x);
 
         float x_normalized = (x + 50) / (100);
         //Debug.Log(x_normalized);

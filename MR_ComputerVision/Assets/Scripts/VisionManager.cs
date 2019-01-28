@@ -1,4 +1,8 @@
-﻿using System;
+﻿// this file is used for taking the image saved from the webcam, uploading it the endpoint,
+// and getting the response and displaying it on the UI
+// it also has functions that are called from other files when panels are clicked
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -10,12 +14,17 @@ using UnityEngine.UI;
 
 public class VisionManager : MonoBehaviour {
 
-    // the custom endpoint to make the request at
+    // TODO: change the endpoint
+    // this is the custom endpoint where the request will be made
     public static string endpoint = "http://40.117.114.194:5000/endpoint";
+
+    // analysedObject will be serialized into the format described here
+    // masterdictionary will be where the JSON response is deserialized
     public AnalysedObject analysedObject;
     public Dictionary<string, Dictionary<string, string>> masterdictionary;
 
 
+    // the System.Serializable classes take the same format the server's response
     [System.Serializable]
     public class Info
     {
@@ -39,13 +48,9 @@ public class VisionManager : MonoBehaviour {
     }
 
     public static VisionManager instance;
-
-    public Texture2D tex;
     
-    internal byte[] imageBytes;
-
+    // this will be set in ImageCapture.cs
     internal string imagePath;
-    internal string textPath;
 
     private void Awake()
     {
@@ -61,11 +66,18 @@ public class VisionManager : MonoBehaviour {
         WWWForm webForm = new WWWForm();
 
         // gets a byte array out of the saved image
-        imageBytes = GetImageAsByteArray(imagePath);
+        byte[] imageBytes = GetImageAsByteArray(imagePath);
+
+        // put in base64 format for endpoint and use with field "image"
         String s = Convert.ToBase64String(imageBytes);
         webForm.AddField("image", s);
 
-        // ResultsLabel.instance.lastLabelPlaced.GetComponent<TextMesh>().text = "sending query";
+        // display the image that was taken and being uploaded to the endpoint
+        Texture2D tex = new Texture2D(2, 2);
+        tex.LoadImage(imageBytes);
+        GameObject taken_image_object = ResultsLabel.instance.lastLabelPlaced.transform.Find("TakenImage").gameObject;
+        UnityEngine.UI.RawImage taken_raw_image = taken_image_object.GetComponent<UnityEngine.UI.RawImage>();
+        taken_raw_image.texture = tex;
 
         using (UnityWebRequest unityWebRequest = UnityWebRequest.Post(endpoint, webForm))
         {
@@ -76,7 +88,7 @@ public class VisionManager : MonoBehaviour {
             }
             else
             {
-                print("Finished Uploading Screenshot");
+                print("finished uploading image");
                 String json_response_text = unityWebRequest.downloadHandler.text;
 
                 analysedObject = new AnalysedObject();
@@ -101,15 +113,16 @@ public class VisionManager : MonoBehaviour {
         }
     }
 
+    // sets all information for a given opend
     public void SetAllInfoFromObjectIDIndex(int index, GameObject similarity_image)
     {
 
         // set the position of the highlight game object
         GameObject highlight_panel = similarity_image.transform.Find("HighlightPanel").gameObject;
-        // GameObject highlight_panel = GameObject.Find("HighlightPanel");
         Debug.Log(highlight_panel.transform.localPosition);
         highlight_panel.transform.localPosition = new Vector3((index * 20) + 10 - 50, highlight_panel.transform.localPosition.y, highlight_panel.transform.localPosition.z);
 
+        // set information based on the current objectid
         string current_objectid = analysedObject.items_info[index].objectid;
 
         // set the title
@@ -119,9 +132,9 @@ public class VisionManager : MonoBehaviour {
         WriteInformation(masterdictionary, current_objectid);
     }
 
+    // update the image with the base64 string of the k nearest neighbors image
     public void WriteImageToScreenFromBase64(string base64_string)
     {
-        // update the image with the base64 string of the k nearest neighbors image
 
         // get the bytes from the base64 image string
         // had to do a few conversions to make it correct for the texture steps
@@ -131,20 +144,20 @@ public class VisionManager : MonoBehaviour {
 
         // create a texture that can be drawn to the screen
         // the size will be overwritten by the byte data anyways
-        tex = new Texture2D(2, 2);
+        Texture2D tex = new Texture2D(2, 2);
         tex.LoadImage(image_bytes);
 
         // write the texture image to the correct place
         GameObject similarity_image_object = ResultsLabel.instance.lastLabelPlaced.transform.Find("SimilarityImage").gameObject;
-        // GameObject similarity_image_object = GameObject.Find("SimilarityImage");
         UnityEngine.UI.RawImage similarity_raw_image = similarity_image_object.GetComponent<UnityEngine.UI.RawImage>();
         similarity_raw_image.texture = tex;
     }
 
+    // returns the deserlized object from the json text from the endpoint response
     public Dictionary<string, Dictionary<string, string>> GetDictFromJsonText(AnalysedObject analysedObject)
     {
         
-        Dictionary<string, Dictionary<string, string>> masterdictionary = new Dictionary<string, Dictionary<string, string>>();
+        Dictionary<string, Dictionary<string, string>> temp_masterdictionary = new Dictionary<string, Dictionary<string, string>>();
 
 
         foreach (Item i in analysedObject.items_info)
@@ -161,10 +174,10 @@ public class VisionManager : MonoBehaviour {
                 EmployeeList.Add(info.title, info.description);
             }
 
-            masterdictionary.Add(i.objectid, EmployeeList);
+            temp_masterdictionary.Add(i.objectid, EmployeeList);
         }
 
-        return masterdictionary;
+        return temp_masterdictionary;
 
     }
 
