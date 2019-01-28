@@ -183,14 +183,16 @@ Please note that the parameters used in this tutorial are not strict and can be 
 
 - **Some Notes about the Program**
 
-    This C# scripts are documented well, but here we make a few notes about things that need (or might need to be) changed before running the application.
+    This C# scripts are documented well, but here we make a few notes here about things that need (or might need to be) changed before running the application.
 
-    - Changing Endpoint in the Code
+    - Changing Custom API Endpoint in the Code
+        - The endpoint address will have to be changed to `http://"Public IP address":5000/endpoint` after getting the server up and running in an Azure VM.
 
     - Deciding Art Piece Information to Display
         - In the Unity code, we have a list specifying what type of information to display on the AR information UI panels. This list describes the fields that are available in the .csv that was created as part of the data formatting.
         
         - Here is an example of topics to display for a given art piece:
+            ```
             - Title
                 - department
                 - Culture
@@ -200,5 +202,18 @@ Please note that the parameters used in this tutorial are not strict and can be 
                 - creditLine
                 - geographyType
                 - classification
+            ```
                 
-            Note that form the topics listed above, only the ones that are included in the POST response are written in the Unity world. This is important because sometimes not all entries are available in the .csv file. The assumption is made that the "Title" field is always present because every object in the dataset should have a name.
+            From these topics listed above, only the ones that are included in the POST response are written in the Unity world. This is important because sometimes not all entries are available in the .csv file. However, the assumption is made that the **Title** field is always present because every object in the dataset should have a name. You may need to edit the code if this is not the case for your data.
+
+# Final Comments
+
+We encourage you to get this code up and running with your own data. Applications for image similarity recommendations go beyond art. You could find related products, the celebraties people look closest, vacation destinations you may like, etc.
+
+
+# Useful Links
+- Microsoft Academy Tutorials: https://docs.microsoft.com/en-us/windows/mixed-reality/academy
+- Scaling Unity UI for HoloLens:
+    - https://heliosinteractive.com/scaling-ui-hololens/
+    - https://forum.unity.com/threads/unity-ui-on-the-hololens.394629/
+- Testing with the HoloLens Emulator: https://docs.microsoft.com/en-us/windows/mixed-reality/using-the-hololens-emulator
