@@ -87,7 +87,7 @@ click Kernel -> Change kernel -> arart
 # Flask Server for Image Search Endpoint
 > With the data processing complete, we can package our image search algorithm and output into a [Flask](http://flask.pocoo.org/) server.
 
-For this project, we only need a single endpoint--one which can accept a [base64 encoded image](https://varvy.com/pagespeed/base64-images.html) and return the art recommendations is a clean [JSON](https://www.json.org/) format. This section explains how to get the server running locally on port 5000, but these configurations can always be changed based on preferences. We will use port 5000 throughout this guide. The code for the server is located in [`server.py`](main/server.py). See the code for more details about how it works. It is essentially a way of packaging the results shown in [FindNearestNeighbors.ipynb](notebooks/FindNearestNeighbors.ipynb) into a server with textual content as well.
+For this project, we only need a single endpoint--one which can accept a [base64 encoded image](https://varvy.com/pagespeed/base64-images.html) and return the art recommendations is a clean [JSON](https://www.json.org/) format. This section explains how to get the server running locally on port 5000, but these configurations can always be changed based on preferences. We will use port 5000 throughout this guide. The code for the server is located in [`server.py`](main/server.py). See the code for more details about how it works. It is essentially a way of packaging the results shown in [FindNearestNeighbors.ipynb](notebooks/FindNearestNeighbors.ipynb) into a server with textual content as well. Also, it is currently run with debug set to True (`debug=True`), but that can be changed to False if looking for faster performance.
 
 After running the server locally (not in Docker), it will be located at at `http://ipaddress:<port>/endpoint`, where `<port>` is 5000 with the code included in this repository. We use a standard [HTTP POST](https://www.w3schools.com/tags/ref_httpmethods.asp) request in our Flask server.
 
@@ -142,7 +142,7 @@ After running the server locally (not in Docker), it will be located at at `http
 
 - **Create Docker Image and Start a Container**
 
-    Now we are ready to use Docker to deploy our Python server on the Azure VM's public IP address at port 5000. To complete the next steps, you will have to have Docker installed on the VM. Follow these steps to [install Docker](https://docs.docker.com/install/) if needed. Finally, keep in mind that all the following commands are run on in the Azure VM terminal.
+    Now we are ready to use Docker to deploy our Python server on the Azure VM's public IP address at port 5000. To complete the next steps, you will have to have Docker installed on the VM. Follow these steps to [install Docker](https://docs.docker.com/install/) if needed. Finally, keep in mind that all the following commands are run on in the Azure VM terminal. Also, you may need to run `sudo` in front of the docker commands depending on user privileges.
 
     ```
     # navigate the the repository
