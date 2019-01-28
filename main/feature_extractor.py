@@ -69,8 +69,6 @@ class FeatureExtractor(torch.nn.Module):
 
     def forward(self, objectid, image=None):
 
-        print(image)
-
         # can call forward with the image data instead of objectid too
         if image is not None:
             image = self.normalized_image_from_image(image)

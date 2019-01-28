@@ -76,11 +76,12 @@ click Kernel -> Change kernel -> arart
     - We use a pre-trained convolutional network, [ResNet](https://arxiv.org/pdf/1512.03385.pdf) 18, trained on ImageNet for image similarity. [ImageNet](https://en.wikipedia.org/wiki/ImageNet) has 1000 categories, so this pre-trained network must learn relevant features to distinguish items from each other. From this network, we can extract the last embedding layer before the final softmax prediction. This leaves us with a 1000 dimensional vector for a given input image. These vectors can then be compared with L2 distance to get a metric for image similarity. Learn more about image search [here](http://yusukematsui.me/project/sis/sis.html). A dictionay keyed by objectID and with values of the vectors is serailized and stored to the [pickle](https://docs.python.org/3/library/pickle.html) file, `features_dict.pickle`. The code for the network that we use can be found in [`feature_extractor.py`](main/server.py), that makes use of [PyTorch](https://pytorch.org/). If wishing to speed up the process with a GPU, you can modify the code in a similar way to explained [here](https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html#training-on-gpu).
 
 - [FindNearestNeighbors.ipynb](notebooks/FindNearestNeighbors.ipynb)
-    - This notebook demonstrates the nearest neighbors algorithm working for the image feature vectors that were computed and saved in the `features_dict.pickle` file. Although not needed for data processing, this notebook will ensure that you used the other notebooks correctly.
+    - This notebook demonstrates the nearest neighbors algorithm working for the image feature vectors that were computed and saved in the `features_dict.pickle` file. The images printed out to the screen should have objects that are visually similar.
 
 **Sanity Check:** After running all of the notebooks, your [`data`](main/data) directory should be set up with the following content:
 - `images` folder with `<objectid>.jpg` names: this contains to images for the objects in the dataset
-- `<filename>.csv` file: this contains the information for the objects
+- `<filename>.csv` file: this contains the information for the objects.
+    > If using a `<filename>` other than `metdata`, make sure to change `"data/metdata.csv"` to `"data/<filename>.csv"` in [data_handler.py](main/data_handler.py).
 - `features_dict.pickle` file: this pickle file a serialized dictionary that holds a dictionary with key=objectid, value=1000 feature vector.
 
 # Flask Server for Image Search Endpoint
