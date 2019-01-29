@@ -88,7 +88,7 @@ public class VisionManager : MonoBehaviour {
             }
             else
             {
-                print("finished uploading image");
+                // print("finished uploading image");
                 String json_response_text = unityWebRequest.downloadHandler.text;
 
                 analysedObject = new AnalysedObject();
@@ -119,7 +119,7 @@ public class VisionManager : MonoBehaviour {
 
         // set the position of the highlight game object
         GameObject highlight_panel = similarity_image.transform.Find("HighlightPanel").gameObject;
-        Debug.Log(highlight_panel.transform.localPosition);
+        // Debug.Log(highlight_panel.transform.localPosition);
         highlight_panel.transform.localPosition = new Vector3((index * 20) + 10 - 50, highlight_panel.transform.localPosition.y, highlight_panel.transform.localPosition.z);
 
         // set information based on the current objectid
@@ -162,14 +162,14 @@ public class VisionManager : MonoBehaviour {
 
         foreach (Item i in analysedObject.items_info)
         {
-            Debug.Log(i.objectid);
+            // Debug.Log(i.objectid);
 
             Dictionary<string, string> EmployeeList = new Dictionary<string, string>();
 
             foreach (Info info in i.information)
             {
-                Debug.Log(info.title);
-                Debug.Log(info.description);
+                // Debug.Log(info.title);
+                // Debug.Log(info.description);
 
                 EmployeeList.Add(info.title, info.description);
             }

@@ -236,7 +236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursor: {fileID: 903519017}
-  labelPrefab: {fileID: 224010663051264520, guid: 2b7afebddc4f88942a262995bf0ecbb4,
+  labelPrefab: {fileID: 224436458447002938, guid: cb1c8fbd741275d4698179639ece95e1,
     type: 2}
   lastLabelPlaced: {fileID: 0}
   lastLabelPlacedText: {fileID: 0}
@@ -395,7 +395,7 @@ SphereCollider:
   m_GameObject: {fileID: 903519017}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}

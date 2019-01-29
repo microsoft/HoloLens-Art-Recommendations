@@ -12,6 +12,7 @@ public class ImageClickHandler : MonoBehaviour, IPointerClickHandler {
     {
     }
 
+    // this makes it so cursor clicks work when testing in Unity
     public void OnPointerClick(PointerEventData eventData)
     {
 

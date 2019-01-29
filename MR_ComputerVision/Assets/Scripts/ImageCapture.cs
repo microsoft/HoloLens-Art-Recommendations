@@ -38,17 +38,7 @@ public class ImageCapture : MonoBehaviour {
             // as a finger tap with the hololens
             print("space key was pressed");
 
-            // Only allow capturing, if not currently processing a request.
-            if (currentlyCapturing == false)
-            {
-                currentlyCapturing = true;
-
-                // Create a panel in world space using the ResultsLabel class
-                ResultsLabel.instance.CreateLabel();
-
-                // Begins the image capture and analysis procedure
-                ExecuteImageCaptureAndAnalysis();
-            }
+            HandleClickEvent();
         }
     }
 
@@ -57,12 +47,61 @@ public class ImageCapture : MonoBehaviour {
     /// </summary>
     private void TapHandler(TappedEventArgs obj)
     {
+
+        print("tap event");
+
+        HandleClickEvent();
+    }
+
+    // allow us to use space bar in Unity but gestures in Hololens but call the same function
+    void HandleClickEvent()
+    {
+        RaycastHit hitInfo;
+        if (Physics.Raycast(
+                Camera.main.transform.position,
+                Camera.main.transform.forward,
+                out hitInfo,
+                20.0f,
+                Physics.AllLayers))
+        {
+            // If the Raycast has succeeded and hit a hologram
+            // hitInfo's point represents the position being gazed at
+            // hitInfo's collider GameObject represents the hologram being gazed at
+
+
+            // convert the world point to the screen
+            Vector3 screenPos = GetComponent<Camera>().WorldToScreenPoint(hitInfo.point);
+
+            // don't do anything unless colliding with the SimiliaryImage game object
+            if (hitInfo.collider.gameObject.name != "SimilarityImage")
+            {
+                return;
+            }
+
+            // go through and update the information with the relevant data based on which of images is clicked
+            Vector2 localCursor;
+            if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(hitInfo.collider.gameObject.GetComponent<RectTransform>(), screenPos, GetComponent<Camera>(), out localCursor))
+                return;
+
+            float x = localCursor[0];
+
+            float x_normalized = (x + 50) / (100);
+            //Debug.Log(x_normalized);
+
+            int objectid_index = (int)(x_normalized / 0.20);
+            //Debug.Log(objectid_index);
+
+            // update with the relevant information
+            GameObject.Find("Main Camera").GetComponent<VisionManager>().SetAllInfoFromObjectIDIndex(objectid_index, hitInfo.collider.gameObject);
+        }
+
+        // if no collision, then continue normally by taking a picture and hitting the custom endpoint
         // Only allow capturing, if not currently processing a request.
-        if (currentlyCapturing == false)
+        else if (currentlyCapturing == false)
         {
             currentlyCapturing = true;
 
-            // Create a label in world space using the ResultsLabel class
+            // Create a panel in world space using the ResultsLabel class
             ResultsLabel.instance.CreateLabel();
 
             // Begins the image capture and analysis procedure
@@ -119,7 +158,7 @@ public class ImageCapture : MonoBehaviour {
             {
                 string filename = @"current_image.jpg";
 
-                Debug.Log(Application.persistentDataPath);
+                // Debug.Log(Application.persistentDataPath);
 
                 string filePath = Path.Combine(Application.persistentDataPath, filename);
 
