@@ -19,7 +19,7 @@
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
     <LayoutDir>C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\bin\x86\Debug\AppX</LayoutDir>
-    <RegisteredManifestChecksum>65217887C8D369D15F47DBA0D192790A76BA58E23957A59EFF7FA4C1F03F538D</RegisteredManifestChecksum>
+    <RegisteredManifestChecksum>566E2E8D0D984D2557F0E9B671396CFFC81EA4B13DC3E0A2EF6594DC59353855</RegisteredManifestChecksum>
     <RegisteredPackageMoniker>MRComputerVision_1.0.0.0_x86__pzq3xp76mxafg</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>MRComputerVision_pzq3xp76mxafg!App</RegisteredUserModeAppID>
     <RegisteredPackageID>MRComputerVision</RegisteredPackageID>
@@ -30,13 +30,13 @@
     <AppXManifest Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2019-01-23T19:23:29.021</Modified>
+      <Modified>2019-01-29T21:04:22.615</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\bin\x86\Debug\MR_ComputerVision.exe">
       <PackagePath>entrypoint\MR_ComputerVision.exe</PackagePath>
-      <Modified>2019-01-23T19:23:10.462</Modified>
+      <Modified>2019-01-29T21:04:00.264</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\.nuget\packages\microsoft.applicationinsights\1.0.0\lib\portable-win81+wpa81\Microsoft.ApplicationInsights.dll">
       <PackagePath>Microsoft.ApplicationInsights.dll</PackagePath>
@@ -500,7 +500,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\Resource.res">
       <PackagePath>Resource.res</PackagePath>
-      <Modified>2019-01-23T18:58:02.258</Modified>
+      <Modified>2019-01-29T20:54:54.435</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\Assets\SplashScreen.scale-200.png">
       <PackagePath>Assets\SplashScreen.scale-200.png</PackagePath>
@@ -558,15 +558,15 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\Data\boot.config">
       <PackagePath>Data\boot.config</PackagePath>
-      <Modified>2019-01-23T18:56:47.250</Modified>
+      <Modified>2019-01-29T20:53:48.827</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\Data\globalgamemanagers">
       <PackagePath>Data\globalgamemanagers</PackagePath>
-      <Modified>2019-01-23T18:56:46.061</Modified>
+      <Modified>2019-01-29T20:53:47.601</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\Data\level0">
       <PackagePath>Data\level0</PackagePath>
-      <Modified>2019-01-23T18:56:43.483</Modified>
+      <Modified>2019-01-29T20:53:45.317</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\Data\Resources\unity default resources">
       <PackagePath>Data\Resources\unity default resources</PackagePath>
@@ -574,39 +574,39 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\Data\Resources\unity_builtin_extra">
       <PackagePath>Data\Resources\unity_builtin_extra</PackagePath>
-      <Modified>2019-01-23T18:56:47.242</Modified>
+      <Modified>2019-01-29T20:53:48.819</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\Data\globalgamemanagers.assets">
       <PackagePath>Data\globalgamemanagers.assets</PackagePath>
-      <Modified>2019-01-23T18:56:46.238</Modified>
+      <Modified>2019-01-29T20:53:47.768</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\Data\resources.assets">
       <PackagePath>Data\resources.assets</PackagePath>
-      <Modified>2019-01-23T18:56:46.714</Modified>
+      <Modified>2019-01-29T20:53:48.270</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\Data\sharedassets0.assets">
       <PackagePath>Data\sharedassets0.assets</PackagePath>
-      <Modified>2019-01-23T18:56:46.853</Modified>
+      <Modified>2019-01-29T20:53:48.418</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\Data\level0.resS">
       <PackagePath>Data\level0.resS</PackagePath>
-      <Modified>2019-01-23T18:56:43.476</Modified>
+      <Modified>2019-01-29T20:53:45.311</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\Data\resources.assets.resS">
       <PackagePath>Data\resources.assets.resS</PackagePath>
-      <Modified>2019-01-23T18:56:46.707</Modified>
+      <Modified>2019-01-29T20:53:48.264</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\Data\sharedassets0.assets.resS">
       <PackagePath>Data\sharedassets0.assets.resS</PackagePath>
-      <Modified>2019-01-23T18:56:46.852</Modified>
+      <Modified>2019-01-29T20:53:48.407</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\Data\managedAssemblies.txt">
       <PackagePath>Data\managedAssemblies.txt</PackagePath>
-      <Modified>2019-01-23T18:58:02.152</Modified>
+      <Modified>2019-01-29T20:54:54.342</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\Data\nativePlugins.txt">
       <PackagePath>Data\nativePlugins.txt</PackagePath>
-      <Modified>2019-01-23T18:58:02.155</Modified>
+      <Modified>2019-01-29T20:54:54.345</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.UniversalCRT.Debug\10.0.17763.0\\redist\Debug\x86\ucrtbased.dll">
       <PackagePath>ucrtbased.dll</PackagePath>
@@ -618,235 +618,235 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2019-01-23T19:23:11.939</Modified>
+      <Modified>2019-01-29T21:04:01.593</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.TextRenderingModule.dll">
       <PackagePath>UnityEngine.TextRenderingModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:25.986</Modified>
+      <Modified>2019-01-29T21:04:19.192</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.TerrainPhysicsModule.dll">
       <PackagePath>UnityEngine.TerrainPhysicsModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:26.014</Modified>
+      <Modified>2019-01-29T21:04:19.224</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.TerrainModule.dll">
       <PackagePath>UnityEngine.TerrainModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:26.038</Modified>
+      <Modified>2019-01-29T21:04:19.257</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.TilemapModule.dll">
       <PackagePath>UnityEngine.TilemapModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:26.067</Modified>
+      <Modified>2019-01-29T21:04:19.291</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.UIElementsModule.dll">
       <PackagePath>UnityEngine.UIElementsModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:26.121</Modified>
+      <Modified>2019-01-29T21:04:19.357</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.SharedInternalsModule.dll">
       <PackagePath>UnityEngine.SharedInternalsModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:26.160</Modified>
+      <Modified>2019-01-29T21:04:19.401</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.ScreenCaptureModule.dll">
       <PackagePath>UnityEngine.ScreenCaptureModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:26.186</Modified>
+      <Modified>2019-01-29T21:04:19.430</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.SpriteMaskModule.dll">
       <PackagePath>UnityEngine.SpriteMaskModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:26.208</Modified>
+      <Modified>2019-01-29T21:04:19.455</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.StyleSheetsModule.dll">
       <PackagePath>UnityEngine.StyleSheetsModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:26.231</Modified>
+      <Modified>2019-01-29T21:04:19.484</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.SpriteShapeModule.dll">
       <PackagePath>UnityEngine.SpriteShapeModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:26.257</Modified>
+      <Modified>2019-01-29T21:04:19.516</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.VideoModule.dll">
       <PackagePath>UnityEngine.VideoModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:26.281</Modified>
+      <Modified>2019-01-29T21:04:19.543</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.VehiclesModule.dll">
       <PackagePath>UnityEngine.VehiclesModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:26.306</Modified>
+      <Modified>2019-01-29T21:04:19.578</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.UnityWebRequestWWWModule.dll">
       <PackagePath>UnityEngine.UnityWebRequestWWWModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:26.331</Modified>
+      <Modified>2019-01-29T21:04:19.607</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.VRModule.dll">
       <PackagePath>UnityEngine.VRModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:26.363</Modified>
+      <Modified>2019-01-29T21:04:19.659</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.WindModule.dll">
       <PackagePath>UnityEngine.WindModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:26.391</Modified>
+      <Modified>2019-01-29T21:04:19.690</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.WebModule.dll">
       <PackagePath>UnityEngine.WebModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:26.414</Modified>
+      <Modified>2019-01-29T21:04:19.717</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.UnityAnalyticsModule.dll">
       <PackagePath>UnityEngine.UnityAnalyticsModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:26.440</Modified>
+      <Modified>2019-01-29T21:04:19.747</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.UNETModule.dll">
       <PackagePath>UnityEngine.UNETModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:26.476</Modified>
+      <Modified>2019-01-29T21:04:19.788</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.UIModule.dll">
       <PackagePath>UnityEngine.UIModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:26.506</Modified>
+      <Modified>2019-01-29T21:04:19.830</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.UnityConnectModule.dll">
       <PackagePath>UnityEngine.UnityConnectModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:26.531</Modified>
+      <Modified>2019-01-29T21:04:19.859</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.UnityWebRequestTextureModule.dll">
       <PackagePath>UnityEngine.UnityWebRequestTextureModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:26.556</Modified>
+      <Modified>2019-01-29T21:04:19.888</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.UnityWebRequestModule.dll">
       <PackagePath>UnityEngine.UnityWebRequestModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:26.581</Modified>
+      <Modified>2019-01-29T21:04:19.922</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.UnityWebRequestAudioModule.dll">
       <PackagePath>UnityEngine.UnityWebRequestAudioModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:26.612</Modified>
+      <Modified>2019-01-29T21:04:19.964</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.PhysicsModule.dll">
       <PackagePath>UnityEngine.PhysicsModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:26.645</Modified>
+      <Modified>2019-01-29T21:04:20.004</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.AssetBundleModule.dll">
       <PackagePath>UnityEngine.AssetBundleModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:26.673</Modified>
+      <Modified>2019-01-29T21:04:20.045</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.ARModule.dll">
       <PackagePath>UnityEngine.ARModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:26.696</Modified>
+      <Modified>2019-01-29T21:04:20.073</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.AnimationModule.dll">
       <PackagePath>UnityEngine.AnimationModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:26.728</Modified>
+      <Modified>2019-01-29T21:04:20.121</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.AudioModule.dll">
       <PackagePath>UnityEngine.AudioModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:26.760</Modified>
+      <Modified>2019-01-29T21:04:20.170</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.CrashReportingModule.dll">
       <PackagePath>UnityEngine.CrashReportingModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:26.797</Modified>
+      <Modified>2019-01-29T21:04:20.206</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.CoreModule.dll">
       <PackagePath>UnityEngine.CoreModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:27.093</Modified>
+      <Modified>2019-01-29T21:04:20.585</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.ClothModule.dll">
       <PackagePath>UnityEngine.ClothModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:27.168</Modified>
+      <Modified>2019-01-29T21:04:20.687</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.AIModule.dll">
       <PackagePath>UnityEngine.AIModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:27.196</Modified>
+      <Modified>2019-01-29T21:04:20.720</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.AccessibilityModule.dll">
       <PackagePath>UnityEngine.AccessibilityModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:27.226</Modified>
+      <Modified>2019-01-29T21:04:20.747</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.JSONSerializeModule.dll">
       <PackagePath>UnityEngine.JSONSerializeModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:27.248</Modified>
+      <Modified>2019-01-29T21:04:20.768</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.InputModule.dll">
       <PackagePath>UnityEngine.InputModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:27.268</Modified>
+      <Modified>2019-01-29T21:04:20.793</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.ParticlesLegacyModule.dll">
       <PackagePath>UnityEngine.ParticlesLegacyModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:27.293</Modified>
+      <Modified>2019-01-29T21:04:20.829</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.Physics2DModule.dll">
       <PackagePath>UnityEngine.Physics2DModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:27.332</Modified>
+      <Modified>2019-01-29T21:04:20.879</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.PerformanceReportingModule.dll">
       <PackagePath>UnityEngine.PerformanceReportingModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:27.362</Modified>
+      <Modified>2019-01-29T21:04:20.910</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.ParticleSystemModule.dll">
       <PackagePath>UnityEngine.ParticleSystemModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:27.399</Modified>
+      <Modified>2019-01-29T21:04:20.943</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.GameCenterModule.dll">
       <PackagePath>UnityEngine.GameCenterModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:27.432</Modified>
+      <Modified>2019-01-29T21:04:20.977</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.dll">
       <PackagePath>UnityEngine.dll</PackagePath>
-      <Modified>2019-01-23T18:57:24.981</Modified>
+      <Modified>2019-01-29T20:54:21.772</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.DirectorModule.dll">
       <PackagePath>UnityEngine.DirectorModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:27.460</Modified>
+      <Modified>2019-01-29T21:04:21.006</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.GridModule.dll">
       <PackagePath>UnityEngine.GridModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:27.482</Modified>
+      <Modified>2019-01-29T21:04:21.029</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.IMGUIModule.dll">
       <PackagePath>UnityEngine.IMGUIModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:27.521</Modified>
+      <Modified>2019-01-29T21:04:21.069</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.ImageConversionModule.dll">
       <PackagePath>UnityEngine.ImageConversionModule.dll</PackagePath>
-      <Modified>2019-01-23T19:23:27.554</Modified>
+      <Modified>2019-01-29T21:04:21.103</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\Newtonsoft.Json.dll">
       <PackagePath>Newtonsoft.Json.dll</PackagePath>
-      <Modified>2019-01-23T19:23:27.637</Modified>
+      <Modified>2019-01-29T21:04:21.175</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.Timeline.dll">
       <PackagePath>UnityEngine.Timeline.dll</PackagePath>
-      <Modified>2019-01-23T19:23:27.699</Modified>
+      <Modified>2019-01-29T21:04:21.275</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\nunit.framework.dll">
       <PackagePath>nunit.framework.dll</PackagePath>
-      <Modified>2019-01-23T19:23:27.780</Modified>
+      <Modified>2019-01-29T21:04:21.382</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.UI.dll">
       <PackagePath>UnityEngine.UI.dll</PackagePath>
-      <Modified>2019-01-23T19:23:27.879</Modified>
+      <Modified>2019-01-29T21:04:21.518</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.SpatialTracking.dll">
       <PackagePath>UnityEngine.SpatialTracking.dll</PackagePath>
-      <Modified>2019-01-23T19:23:27.930</Modified>
+      <Modified>2019-01-29T21:04:21.585</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.Analytics.dll">
       <PackagePath>UnityEngine.Analytics.dll</PackagePath>
-      <Modified>2019-01-23T19:23:27.962</Modified>
+      <Modified>2019-01-29T21:04:21.623</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.HoloLens.dll">
       <PackagePath>UnityEngine.HoloLens.dll</PackagePath>
-      <Modified>2019-01-23T19:23:28.000</Modified>
+      <Modified>2019-01-29T21:04:21.668</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.StandardEvents.dll">
       <PackagePath>UnityEngine.StandardEvents.dll</PackagePath>
-      <Modified>2019-01-23T19:23:28.035</Modified>
+      <Modified>2019-01-29T21:04:21.708</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\UnityEngine.Networking.dll">
       <PackagePath>UnityEngine.Networking.dll</PackagePath>
-      <Modified>2019-01-23T19:23:28.111</Modified>
+      <Modified>2019-01-29T21:04:21.796</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\GLTFSerializationUWP.dll">
       <PackagePath>GLTFSerializationUWP.dll</PackagePath>
-      <Modified>2019-01-23T19:23:28.180</Modified>
+      <Modified>2019-01-29T21:04:21.874</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\Assembly-CSharp.dll">
       <PackagePath>Assembly-CSharp.dll</PackagePath>
-      <Modified>2019-01-23T19:23:25.866</Modified>
+      <Modified>2019-01-29T21:04:19.051</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\v-etwebe\Documents\arart\MR_ComputerVision\App\MR_ComputerVision\bin\x86\Debug\Core\MR_ComputerVision.exe">
       <PackagePath>MR_ComputerVision.exe</PackagePath>
-      <Modified>2019-01-23T19:23:29.014</Modified>
+      <Modified>2019-01-29T21:04:22.608</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
