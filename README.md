@@ -6,7 +6,11 @@ This project shows an application for augmented reality in museums. We provide a
 *Key Topics: Microsoft HoloLens, Unity, Computer Vision, Docker, Python, C#*
 
 # Project Results
-> These are the type of results you will have by the end of the guide.
+> These are the type of results you will have by the end of the guide. The first .gif demonstrates the current UI. The other videos illustrate the core components but at earlier stages of development.
+
+Full functionality with current UI.
+
+![full_demo](media/full_demo.gif)
 
 Perform an [Air tap](https://docs.microsoft.com/en-us/windows/mixed-reality/gestures#air-tap) with the HoloLens to draw the information panels.
 
@@ -16,7 +20,7 @@ Information panels are spawned for each Air tap based on what you are looking at
 
 ![hololens_arart_demo_no_clicks](media/hololens_arart_demo_no_clicks.gif)
 
-Here is a closer look at an informatin panel. Sorted left to right, the small images represent the closest-looking images in your dataset (in our case, a portion of The MET data). Clicking on the small images brings up the information for that particular art piece. These 5 similar images came from searching the dataset with an image of myself, which is why the recommended art pieces are human depictions.
+Here is a closer look at an informatin panel. Sorted left to right, the small images represent the closest-looking images in your dataset (in our case, a portion of The MET data). Clicking on the small images brings up the information for that particular art piece. These 5 similar images came from searching the dataset with an image of myself, which is why the recommended art pieces are human depictions. (Ignore the white text behind the title; this was for testing purposes.)
 
 ![example_gui_1](media/example_gui_1.gif)
 
