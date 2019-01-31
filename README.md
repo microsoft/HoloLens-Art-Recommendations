@@ -1,7 +1,7 @@
 # Art Recommendations with the Microsoft HoloLens
 > Replicate this work with any data to create an art-recommendation HoloLens application.
 
-This project shows an application for augmented reality in museums. We provide all the steps necessary to write an art-recommendation application for the Microsoft HoloLens. This project makes use of data from [The Metropolitan Museum of Art (The MET) Collection API](https://metmuseum.github.io/), but code is written in way that it can be adapted to other data sources. The project consists of two major components, namely the `backend` (for data processing, image similarity search, and web app endpoint deployment) and the `frontend` (Unity application and visualization for the Hololens), in which we build off of [this tutorial](https://docs.microsoft.com/en-us/windows/mixed-reality/mr-azure-302). We step through the components and how to replicate the work in this document.
+This project shows an application for augmented reality in museums. We provide all the steps necessary to write an art-recommendation application for the Microsoft HoloLens. This project makes use of data from [The Metropolitan Museum of Art (The MET) Collection API](https://metmuseum.github.io/), but the code is written in such a way that it can be adapted to other data sources. The project consists of two major components, namely the `backend` (for data processing, image similarity search, and web app endpoint deployment) and the `frontend` (Unity application and visualization for the Hololens), in which we build off of [this tutorial](https://docs.microsoft.com/en-us/windows/mixed-reality/mr-azure-302). We step through the components and how to replicate the work in this document.
 
 *Key Topics: Microsoft HoloLens, Unity, Computer Vision, Docker, Python, C#*
 
@@ -25,7 +25,7 @@ Here is a closer look at an informatin panel. Sorted left to right, the small im
 ![example_gui_1](media/example_gui_1.gif)
 
 # Local Development Setup
-> Set up a virtual environment for local development before deploying to an Azure VM. These commands work on a Linux/Unix machine, but similar commands will work for other devices. If new to using virtualenv, check out their documenation [here](https://docs.python.org/3/library/venv.html).
+> Set up a virtual environment for local development before deploying to an Azure VM. These commands work on a Linux/Unix machine, but similar commands will work for other devices. If new to using virtualenv, check out their documentation [here](https://docs.python.org/3/library/venv.html).
 
 ```
 # first clone the repository
@@ -42,7 +42,7 @@ source venv/bin/activate
 
 # updgrade pip and install dependencies
 pip install --upgrade pip
-pip install -r requirements.txt
+pip install -r main/requirements.txt
 
 # install kernel for jupyter notebook
 # this allows you to use this virtualenv in the notebooks
@@ -68,18 +68,26 @@ jupyter notebook
 click Kernel -> Change kernel -> arart
 ```
 
-- [CreateDatasetFromMetAPI.ipynb](notebooks/CreateDatasetFromMetAPI.ipynb)
+> Note. If doing this on an Ubuntu machine, you will need to install some dependencies for `import cv2` to work.
+
+```
+# these commands should be run in the terminal before running the notebooks
+!apt update && apt install -y libsm6 libxext6
+sudo apt-get install libsm6 libxrender1 libfontconfig1
+```
+
+- [0_CreateDatasetFromMetAPI.ipynb](notebooks/0_CreateDatasetFromMetAPI.ipynb)
     - This notebook queries the MET API for a specified number of times to create a .csv file. Each row in the .csv file if for a different object in the museum. The columns are for each field in the dataset. The following image shows what the .csv should look like. Not all the entries will be complete, such as the image URL for objectID 36. We simply ignore these fields for this product.
     
     ![met_data](media/met_data.png)
 
-- [SaveImagesFromCsvURLs.ipynb](notebooks/SaveImagesFromCsvURLs.ipynb)
+- [1_SaveImagesFromCsvURLs.ipynb](notebooks/1_SaveImagesFromCsvURLs.ipynb)
     - This notebook will use the .csv file created from [CreateDatasetFromMetAPI.ipynb](notebooks/CreateDatasetFromMetAPI.ipynb) to download the images to an `images` folder. However, this may not be needed depending on the dataset used. If you have access to the images, you will just have to format a `images` folder to have entries with `<objectid>.jpg`. We ignore the objects in the dataset that don't have an associated image.
 
-- [CreateFeaturesDictionary.ipynb](notebooks/CreateFeaturesDictionary.ipynb)
+- [2_CreateFeaturesDictionary.ipynb](notebooks/2_CreateFeaturesDictionary.ipynb)
     - We use a pre-trained convolutional network, [ResNet](https://arxiv.org/pdf/1512.03385.pdf) 18, trained on ImageNet for image similarity. [ImageNet](https://en.wikipedia.org/wiki/ImageNet) has 1000 categories, so this pre-trained network must learn relevant features to distinguish items from each other. From this network, we can extract the last embedding layer before the final softmax prediction. This leaves us with a 1000 dimensional vector for a given input image. These vectors can then be compared with L2 distance to get a metric for image similarity. Learn more about image search [here](http://yusukematsui.me/project/sis/sis.html). A dictionay keyed by objectID and with values of the vectors is serailized and stored to the [pickle](https://docs.python.org/3/library/pickle.html) file, `features_dict.pickle`. The code for the network that we use can be found in [`feature_extractor.py`](main/server.py), that makes use of [PyTorch](https://pytorch.org/). If wishing to speed up the process with a GPU, you can modify the code in a similar way to explained [here](https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html#training-on-gpu).
 
-- [FindNearestNeighbors.ipynb](notebooks/FindNearestNeighbors.ipynb)
+- [3_FindNearestNeighbors.ipynb](notebooks/3_FindNearestNeighbors.ipynb)
     - This notebook demonstrates the nearest neighbors algorithm working for the image feature vectors that were computed and saved in the `features_dict.pickle` file. The images printed out to the screen should have objects that are visually similar.
 
 **Sanity Check:** After running all of the notebooks, your [`data`](main/data) directory should be set up with the following content:
@@ -97,9 +105,11 @@ After running the server locally (not in Docker), it will be located at at `http
 
 - Run the server.
     ```
+    # make sure to be using the virtual environment
+
     # start the Flask server
     cd main
-    python app.py
+    python server.py
     ```
 
 - Request format design choices. Learn more about Flask POST requests on [this page](http://flask.pocoo.org/docs/1.0/quickstart/#the-request-object).
@@ -161,13 +171,17 @@ After running the server locally (not in Docker), it will be located at at `http
     # run the docker image in a container
     # this will start the server as specified in the Dockerfile
     docker run -d -p 5000:5000 -v $(pwd)/data:/main/data arart
+    ```
+    ```
+    # SERVER WILL BE RUNNING AT THIS POINT. THE FOLLOWING IS ADDITIONAL INFO:
+    # ----------------------------------------------------------------------
 
     # (additional info) enter the container without starting the server right away
-    docker run -it --entrypoint /bin/bash -p 5000:5000 -v $(pwd)/data:/main/data arart
+    # docker run -it --entrypoint /bin/bash -p 5000:5000 -v $(pwd)/data:/main/data arart
 
-    # (additional info) enter a docker container already running
-    docker ps # make not of the container id
-    docker exec -it <container id> bash
+    # (additional info) enter a docker container that is already running
+    # docker ps # make note of the container id
+    # docker exec -it <container id> bash
 
     # notes about the docker flags:
     # -d runs it in the background
