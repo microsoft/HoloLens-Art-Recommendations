@@ -52,7 +52,7 @@ ipython kernel install --user --name=arart
 deactivate
 ```
 
-We use a `virtualenv` like this for local testing, but we use `Docker` containers for deployment (which is described later). `virtualenv` is simply faster when working on your local machine, but `Docker` makes it easy to deploy on an Azure VM. Because all dependencies are listed in the [requirements.txt] file, it's easy to go back and forth between `virtualenv` and `Docker`.
+We use a `virtualenv` like this for local testing, but we use `Docker` containers for deployment (which is described later). `virtualenv` is simply faster when working on your local machine, but `Docker` makes it easy to deploy on an Azure VM. Because all dependencies are listed in the [requirements.txt](main/requirements.txt) file, it's easy to go back and forth between `virtualenv` and `Docker`.
 
 # Data Processing
 > If using data from a source other than The MET, this section will require the most code on your end. We do our best to outline the necessary steps in the iPython notebooks. The final output will be a folder of images with a .csv file with fields of textual informtion.
@@ -72,7 +72,8 @@ click Kernel -> Change kernel -> arart
 
 ```
 # these commands should be run in the terminal before running the notebooks
-!apt update && apt install -y libsm6 libxext6
+sudo apt update
+sudo apt install -y libsm6 libxext6
 sudo apt-get install libsm6 libxrender1 libfontconfig1
 ```
 
