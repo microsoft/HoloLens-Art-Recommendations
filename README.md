@@ -226,6 +226,8 @@ Please note that the parameters used in this tutorial are not strict and can be 
                 
             From these topics listed above, only the ones that are included in the POST response are written in the Unity world. This is important because sometimes not all entries are available in the .csv file. However, the assumption is made that the **Title** field is always present because every object in the dataset should have a name. You may need to edit the code if this is not the case for your data.
 
+            > I've noticed a few times that the app has crashed for a key not found error. I believe I had these errors checked for in my code, but you may wish to verify and/or take a look if you experience problems with this.
+
 # Final Comments
 
 We encourage you to get this code up and running with your own data. Applications for image similarity recommendations go beyond art. You could find related products, the celebraties people look closest, vacation destinations you may like, etc.
