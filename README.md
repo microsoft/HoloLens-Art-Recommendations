@@ -8,7 +8,7 @@ This project shows an application for augmented reality in museums. We provide a
 # Project Results
 > These are the type of results you will have by the end of the guide. The first .gif demonstrates the current UI. The other videos illustrate the core components but at earlier stages of development.
 
-Full functionality with current UI.
+Full functionality with current UI. See the video on YouTube [here](https://www.youtube.com/watch?v=VorqouHAdkc).
 
 ![full_demo](media/full_demo.gif)
 
@@ -16,11 +16,11 @@ Perform an [Air tap](https://docs.microsoft.com/en-us/windows/mixed-reality/gest
 
 ![finger_click](media/finger_click.gif)
 
-Information panels are spawned for each Air tap based on what you are looking at. Here you see the panels overlayed in the real-world.
+Information panels are spawned for each Air tap based on what you are looking at. Here you see the panels overlayed in the real-world. Note that the panels have a new UI, which is depicted in the GIF at the top.
 
 ![hololens_arart_demo_no_clicks](media/hololens_arart_demo_no_clicks.gif)
 
-Here is a closer look at an informatin panel. Sorted left to right, the small images represent the closest-looking images in your dataset (in our case, a portion of The MET data). Clicking on the small images brings up the information for that particular art piece. These 5 similar images came from searching the dataset with an image of myself, which is why the recommended art pieces are human depictions. (Ignore the white text behind the title; this was for testing purposes.)
+Here is a closer look at an information panel. Sorted left to right, the small images represent the closest-looking images in your dataset (in our case, a portion of The MET data). Clicking on the small images brings up the information for that particular art piece. These 5 similar images came from searching the dataset with an image of myself, which is why the recommended art pieces are human depictions. (Ignore the white text behind the title; this was for testing purposes.)
 
 ![example_gui_1](media/example_gui_1.gif)
 
@@ -68,7 +68,7 @@ jupyter notebook
 click Kernel -> Change kernel -> arart
 ```
 
-> Note. If doing this on an Ubuntu machine, you will need to install some dependencies for `import cv2` to work.
+> Note if doing this on an Ubuntu machine, you will need to install some dependencies for `import cv2` to work.
 
 ```
 # these commands should be run in the terminal before running the notebooks
