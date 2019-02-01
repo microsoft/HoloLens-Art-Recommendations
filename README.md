@@ -237,3 +237,17 @@ We encourage you to get this code up and running with your own data. Application
     - https://heliosinteractive.com/scaling-ui-hololens/
     - https://forum.unity.com/threads/unity-ui-on-the-hololens.394629/
 - Testing with the HoloLens Emulator: https://docs.microsoft.com/en-us/windows/mixed-reality/using-the-hololens-emulator
+
+# Future Work: Using AI Locally on the HoloLens
+> The steps to using AI locally on the HoloLens are not described in this repo. However, below are some resources and tips for how this would be accomplished for this project.
+
+- PyTorch -> [ONNX Format](https://onnx.ai/)
+    - The best way to run the inference for images locally would be to use the ONNX format as an intermediate format which can be ported to C# for use with Unity. We use PyTorch to create the feature dictionary, which was done in notebook [2_CreateFeaturesDictionary.ipynb](notebooks/2_CreateFeaturesDictionary.ipynb), so we export the same model (contained in [feature_extractor.py](main/feature_extractor.py)) to ONNX format. We can perform this operation with [export_to_onnx.py](main/export_to_onnx.py). It creates an ONNX file called `"onnx_model_name.onnx"`, although this name can be modified. **Note that image normalization will have to be done on the C# side if using the [feature_extractor.py](main/feature_extractor.py) as is.**
+
+
+- Microsoft's Custom Vision API -> ONNX Format -> C# in Unity: https://meulta.com/en/2018/05/18/experimenting-with-windows-machine-learning-and-mixed-reality/
+
+    - This guide is a valuable resource that explains the pipeline from going from an ONNX model to using it in a Unity application for the HoloLens (or Mixed Reality device, in the article's case). We use a PyTorch model that can be exported to ONNX, so the steps after having the model in the ONNX format should work. **However, image normalization will need to be taken into account.**
+
+- General Structure:
+    - To make these steps work with the structure of this project, you'll have to **edit the server to accept the vector computed from the ResNet 18 model**. Essentially, by running the network on the HoloLens itself you eliminate the need for the server to run inference. This may save memory resources. The only the reason the server is still needed to run online is to hold the large number of images. However, you could opt to run the server on the HoloLens itself with all the images and the CSV stored locally. This would make an application that is entirely offline, but it may take a lot of space on the HoloLens.
