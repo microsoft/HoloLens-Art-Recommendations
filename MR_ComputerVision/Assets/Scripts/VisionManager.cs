@@ -16,7 +16,7 @@ public class VisionManager : MonoBehaviour {
 
     // TODO: change the endpoint
     // this is the custom endpoint where the request will be made
-    public static string endpoint = "http://40.117.114.194:5000/endpoint";
+    public static string endpoint = "http://<your VM's IP address>:5000/endpoint";
 
     // analysedObject will be serialized into the format described here
     // masterdictionary will be where the JSON response is deserialized
